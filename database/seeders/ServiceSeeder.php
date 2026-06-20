@@ -12,7 +12,6 @@ class ServiceSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create sample services
         Service::create([
             'name' => 'Regular Laundry',
             'description' => 'Standard laundry service with basic washing and drying',
