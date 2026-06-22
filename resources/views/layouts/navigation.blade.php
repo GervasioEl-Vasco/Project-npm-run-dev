@@ -1,7 +1,7 @@
 @php
     $navigationItems = [
         ['label' => 'Dashboard', 'route' => 'dashboard', 'active' => 'dashboard'],
-        ['label' => 'Pesanan', 'route' => 'orders.index', 'active' => 'orders.*'],
+        ['label' => 'Pesanan', 'route' => 'pesanan.index', 'active' => 'pesanan.*'],
         ['label' => 'Tracking', 'route' => null, 'active' => 'tracking.*'],
         ['label' => 'Riwayat', 'route' => 'history.index', 'active' => 'history.*'],
     ];
