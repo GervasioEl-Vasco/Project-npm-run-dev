@@ -97,11 +97,11 @@
         </a>
 
         <div>
-            <a href="auth/login" class="btn btn-outline-danger me-2">
+            <a href="{{ route('login') }}" class="btn btn-outline-danger me-2">
                 Login
             </a>
 
-            <a href="auth/register" class="btn btn-danger">
+            <a href="{{ route('register') }}" class="btn btn-danger">
                 Daftar
             </a>
         </div>
@@ -125,7 +125,7 @@
                 </p>
 
                 <div class="mt-4">
-                    <a href="/dashboard.blade.php" class="btn btn-pink me-2">
+                    <a href="{{ route('dashboard') }}" class="btn btn-pink me-2">
                         Dashboard
                     </a>
 
