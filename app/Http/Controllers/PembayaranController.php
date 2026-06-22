@@ -11,7 +11,11 @@ class PembayaranController extends Controller
     public function index()
     {
         $pembayaran = Pembayaran::with('pesanan')->get();
-        return view('pembayaran.index', compact('pembayaran'));
+
+        return response()->json([
+            'message' => 'Data pembayaran berhasil diambil.',
+            'data' => $pembayaran,
+        ]);
     }
 
     public function store(Request $request, Pesanan $pesanan)
@@ -26,7 +30,7 @@ class PembayaranController extends Controller
             $path = $request->file('bukti_bayar')->store('bukti_bayar', 'public');
         }
 
-        Pembayaran::create([
+        $pembayaran = Pembayaran::create([
             'pesanan_id' => $pesanan->id,
             'nominal' => $pesanan->total_harga,
             'metode_pembayaran' => $request->metode_pembayaran,
@@ -34,7 +38,10 @@ class PembayaranController extends Controller
             'status' => 'menunggu_konfirmasi',
         ]);
 
-        return back()->with('success', 'Pembayaran berhasil dikirim dan menunggu konfirmasi.');
+        return response()->json([
+            'message' => 'Pembayaran berhasil dikirim dan menunggu konfirmasi.',
+            'data' => $pembayaran,
+        ], 201);
     }
 
     public function konfirmasi(Pembayaran $pembayaran)
@@ -42,6 +49,9 @@ class PembayaranController extends Controller
         $pembayaran->update(['status' => 'berhasil']);
         $pembayaran->pesanan->update(['status_pembayaran' => 'sudah_bayar']);
 
-        return back()->with('success', 'Pembayaran berhasil dikonfirmasi.');
+        return response()->json([
+            'message' => 'Pembayaran berhasil dikonfirmasi.',
+            'data' => $pembayaran->fresh(['pesanan']),
+        ]);
     }
 }
