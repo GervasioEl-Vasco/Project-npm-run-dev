@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pesanan;
 use App\Models\Layanan;
 use App\Models\LogStatus;
+use App\Services\CostCalculationService;
 use Illuminate\Http\Request;
 
 class PesananController extends Controller
@@ -12,16 +13,24 @@ class PesananController extends Controller
     public function index()
     {
         $pesanan = Pesanan::with(['user', 'layanan'])->get();
-        return view('pesanan.index', compact('pesanan'));
+
+        return response()->json([
+            'message' => 'Data pesanan berhasil diambil.',
+            'data' => $pesanan,
+        ]);
     }
 
     public function create()
     {
         $layanan = Layanan::where('status_tersedia', true)->get();
-        return view('pesanan.create', compact('layanan'));
+
+        return response()->json([
+            'message' => 'Data layanan tersedia untuk membuat pesanan berhasil diambil.',
+            'data' => $layanan,
+        ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, CostCalculationService $costCalculationService)
     {
         $request->validate([
             'layanan_id' => 'required|exists:layanan,id',
@@ -29,7 +38,7 @@ class PesananController extends Controller
         ]);
 
         $layanan = Layanan::findOrFail($request->layanan_id);
-        $total_harga = $layanan->harga * $request->berat_jumlah;
+        $total_harga = $costCalculationService->hitungTotal($layanan, (int) $request->berat_jumlah);
 
         $pesanan = Pesanan::create([
             'user_id' => auth()->id() ?? 1, // fallback untuk testing
@@ -48,12 +57,19 @@ class PesananController extends Controller
             'keterangan' => 'Pesanan baru dibuat',
         ]);
 
-        return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dibuat.');
+        return response()->json([
+            'message' => 'Pesanan berhasil dibuat.',
+            'data' => $pesanan->load(['user', 'layanan']),
+        ], 201);
     }
 
     public function show(Pesanan $pesanan)
     {
         $pesanan->load(['user', 'layanan', 'logStatus', 'pembayaran', 'pengecekan']);
-        return view('pesanan.show', compact('pesanan'));
+
+        return response()->json([
+            'message' => 'Detail pesanan berhasil diambil.',
+            'data' => $pesanan,
+        ]);
     }
 }
