@@ -5,17 +5,17 @@
         </h2>
     </x-slot>
 
-    <div class="py-12" x-data="{ currentStatus: '{{ strtolower($order->status) }}' }">
+    <div class="py-12" x-data="{ currentStatus: '{{ strtolower($pesanan->status_pesanan) }}' }">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-2xl p-8 border border-gray-100">
                 <div class="flex justify-between items-center mb-8 border-b border-gray-100 pb-4">
                     <div>
                         <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest">Detail Pelacakan</span>
-                        <h3 class="text-2xl font-black text-gray-800">#ORD-{{ $order->id }}</h3>
+                        <h3 class="text-2xl font-black text-gray-800">#ORD-{{ $pesanan->id }}</h3>
                     </div>
                     <span class="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider
-                        {{ $order->status == 'Selesai' ? 'bg-green-100 text-green-800' : 'bg-indigo-100 text-indigo-800' }}">
-                        {{ $order->status }}
+                        {{ $pesanan->status_pesanan == 'selesai' ? 'bg-green-100 text-green-800' : 'bg-indigo-100 text-indigo-800' }}">
+                        {{ $pesanan->status_pesanan }}
                     </span>
                 </div>
 
@@ -26,13 +26,16 @@
 
                     @php
                         $statuses = ['diterima', 'checked', 'dicuci', 'dikeringkan', 'disetrika', 'selesai'];
-                        $currentIndex = array_search(strtolower($order->status), $statuses);
+                        $currentIndex = array_search(strtolower($pesanan->status_pesanan), $statuses);
+                        if ($currentIndex === false && strtolower($pesanan->status_pesanan) === 'menunggu') {
+                            $currentIndex = 0; // map 'menunggu' to 'diterima'
+                        }
                     @endphp
 
                     @foreach($statuses as $index => $step)
                         @php
-                            $isCompleted = $index <= $currentIndex;
-                            $isActive = $index === $currentIndex;
+                            $isCompleted = $currentIndex !== false && $index <= $currentIndex;
+                            $isActive = $currentIndex !== false && $index === $currentIndex;
                         @endphp
                         <div class="relative z-10 flex flex-col items-center text-center w-full md:w-auto">
                             <div class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg transition duration-500 shadow-md
@@ -56,15 +59,17 @@
                 <div class="mt-12 bg-gray-50 rounded-xl p-6 border border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
                         <span class="text-xs text-gray-400 block font-bold">Layanan</span>
-                        <span class="text-gray-800 font-bold">{{ $order->service->name }}</span>
+                        <span class="text-gray-800 font-bold">{{ $pesanan->layanan->nama_layanan }}</span>
                     </div>
                     <div>
                         <span class="text-xs text-gray-400 block font-bold">Berat Cucian</span>
-                        <span class="text-gray-800 font-bold">{{ $order->weight }} Kg</span>
+                        <span class="text-gray-800 font-bold">{{ $pesanan->berat_jumlah }} Kg</span>
                     </div>
                     <div>
                         <span class="text-xs text-gray-400 block font-bold">Estimasi Selesai</span>
-                        <span class="text-gray-800 font-bold">{{ $order->estimated_completed_at ?? '-' }}</span>
+                        <span class="text-gray-800 font-bold">
+                            {{ $pesanan->created_at ? $pesanan->created_at->addDays($pesanan->layanan->estimasi_waktu ?? 1)->format('d M Y') : '-' }}
+                        </span>
                     </div>
                 </div>
             </div>

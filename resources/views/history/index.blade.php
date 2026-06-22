@@ -39,22 +39,22 @@
                         <tbody>
                             @foreach($histories as $history)
                             <tr class="hover:bg-gray-50 transition duration-150"
-                                x-show="(statusFilter === 'all' || statusFilter === '{{ strtolower($history->status) }}') && 
+                                x-show="(statusFilter === 'all' || statusFilter === '{{ strtolower($history->status_pesanan) }}') && 
                                         ('ORD-{{ $history->id }}'.toLowerCase().includes(search.toLowerCase()))">
                                 
                                 <td class="py-2 px-4 border-b text-sm font-medium text-gray-900">#ORD-{{ $history->id }}</td>
                                 <td class="py-2 px-4 border-b text-sm text-gray-600">{{ $history->created_at }}</td>
-                                <td class="py-2 px-4 border-b text-sm">{{ $history->service->name }} ({{ $history->weight }} Kg)</td>
-                                <td class="py-2 px-4 border-b text-sm">Rp {{ number_format($history->total_price, 0, ',', '.') }}</td>
+                                <td class="py-2 px-4 border-b text-sm">{{ $history->layanan->nama_layanan }} ({{ $history->berat_jumlah }} Kg)</td>
+                                <td class="py-2 px-4 border-b text-sm">Rp {{ number_format($history->total_harga, 0, ',', '.') }}</td>
                                 <td class="py-2 px-4 border-b text-sm">
                                     <span class="px-2 py-1 text-xs font-bold uppercase rounded-full 
-                                        {{ $history->status == 'Selesai' ? 'bg-green-200 text-green-800' : 
-                                          ($history->status == 'Proses' ? 'bg-blue-200 text-blue-800' : 'bg-yellow-200 text-yellow-800') }}">
-                                        {{ $history->status }}
+                                        {{ $history->status_pesanan == 'selesai' ? 'bg-green-200 text-green-800' : 
+                                          ($history->status_pesanan == 'proses' || $history->status_pesanan == 'diproses' ? 'bg-blue-200 text-blue-800' : 'bg-yellow-200 text-yellow-800') }}">
+                                        {{ $history->status_pesanan }}
                                     </span>
                                 </td>
                                 <td class="py-2 px-4 border-b text-sm flex gap-2">
-                                    <a href="{{ route('payments.show', $history->id) }}" class="text-indigo-600 hover:text-indigo-900 font-semibold underline">Lihat Nota</a>
+                                    <a href="{{ route('pembayaran.show', $history->id) }}" class="text-indigo-600 hover:text-indigo-900 font-semibold underline">Lihat Nota</a>
                                 </td>
                             </tr>
                             @endforeach
