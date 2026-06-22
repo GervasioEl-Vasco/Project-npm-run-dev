@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderStatusUpdated;
 use App\Models\Pesanan;
 use App\Models\LogStatus;
 use Illuminate\Http\Request;
@@ -27,6 +28,16 @@ class StatusPesananController extends Controller
             'keterangan' => $request->keterangan ?? 'Status diubah oleh admin',
         ]);
 
-        return back()->with('success', 'Status pesanan berhasil diperbarui.');
+        OrderStatusUpdated::dispatch(
+            $pesanan,
+            $status_lama,
+            $request->status_pesanan,
+            $request->keterangan ?? 'Status diubah oleh admin',
+        );
+
+        return response()->json([
+            'message' => 'Status pesanan berhasil diperbarui.',
+            'data' => $pesanan->fresh(['user', 'layanan', 'logStatus']),
+        ]);
     }
 }
