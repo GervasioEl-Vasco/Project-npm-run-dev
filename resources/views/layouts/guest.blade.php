@@ -16,14 +16,7 @@
     </head>
     <body class="bg-slate-50 font-sans text-slate-900 antialiased">
         <div class="flex min-h-screen flex-col items-center justify-center px-4 py-8">
-            <div class="mb-8">
-                <a href="/" class="flex items-center gap-3">
-                    <span class="flex h-12 w-12 items-center justify-center rounded-lg bg-teal-600 text-base font-bold text-white">
-                        SL
-                    </span>
-                    <span class="text-lg font-bold text-slate-950">Sistem Laundry</span>
-                </a>
-            </div>
+            
 
             <div class="w-full max-w-md overflow-hidden rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
                 {{ $slot }}
