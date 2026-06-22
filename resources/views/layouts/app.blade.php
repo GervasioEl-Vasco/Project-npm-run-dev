@@ -14,23 +14,35 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="bg-slate-50 font-sans antialiased">
+        <div class="min-h-screen">
             @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+            @php
+                $isAdmin = Auth::user()?->role === 'admin';
+            @endphp
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <div class="mx-auto flex w-full max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:px-8">
+                <div class="hidden w-64 shrink-0 lg:block">
+                    @if ($isAdmin)
+                        <x-sidebar-admin />
+                    @else
+                        <x-sidebar-customer />
+                    @endif
+                </div>
+
+                <div class="min-w-0 flex-1">
+                    @isset($header)
+                        <header class="mb-6">
+                            {{ $header }}
+                        </header>
+                    @endisset
+
+                    <main>
+                        {{ $slot }}
+                    </main>
+                </div>
+            </div>
         </div>
     </body>
 </html>

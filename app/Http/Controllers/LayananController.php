@@ -10,12 +10,11 @@ class LayananController extends Controller
     public function index()
     {
         $layanan = Layanan::all();
-        return view('layanan.index', compact('layanan'));
-    }
 
-    public function create()
-    {
-        return view('layanan.create');
+        return response()->json([
+            'message' => 'Data layanan berhasil diambil.',
+            'data' => $layanan,
+        ]);
     }
 
     public function store(Request $request)
@@ -26,14 +25,20 @@ class LayananController extends Controller
             'estimasi_waktu' => 'required|integer',
         ]);
 
-        Layanan::create($request->all());
+        $layanan = Layanan::create($request->all());
 
-        return redirect()->route('layanan.index')->with('success', 'Layanan berhasil ditambahkan.');
+        return response()->json([
+            'message' => 'Layanan berhasil ditambahkan.',
+            'data' => $layanan,
+        ], 201);
     }
 
-    public function edit(Layanan $layanan)
+    public function show(Layanan $layanan)
     {
-        return view('layanan.edit', compact('layanan'));
+        return response()->json([
+            'message' => 'Detail layanan berhasil diambil.',
+            'data' => $layanan,
+        ]);
     }
 
     public function update(Request $request, Layanan $layanan)
@@ -46,12 +51,18 @@ class LayananController extends Controller
 
         $layanan->update($request->all());
 
-        return redirect()->route('layanan.index')->with('success', 'Layanan berhasil diupdate.');
+        return response()->json([
+            'message' => 'Layanan berhasil diupdate.',
+            'data' => $layanan,
+        ]);
     }
 
     public function destroy(Layanan $layanan)
     {
         $layanan->delete();
-        return redirect()->route('layanan.index')->with('success', 'Layanan berhasil dihapus.');
+
+        return response()->json([
+            'message' => 'Layanan berhasil dihapus.',
+        ]);
     }
 }
