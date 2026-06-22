@@ -1,48 +1,119 @@
-<x-guest-layout>
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.app')
 
-    <div class="mb-6">
-        <p class="text-sm font-medium text-teal-700">Masuk</p>
-        <h1 class="mt-1 text-2xl font-bold text-slate-950">Selamat datang kembali</h1>
-    </div>
+@section('content')
+<div class="min-h-screen bg-pink-50">
 
-    <form method="POST" action="{{ route('login') }}" class="space-y-5">
-        @csrf
+    <!-- Navbar -->
+    <nav class="bg-pink-600 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-white">
+                🧺 PING LAUNDRY
+            </h1>
 
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="mt-2 block w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <div class="flex items-center gap-4">
+                <span class="text-white">
+                    Halo, {{ Auth::user()->name }}
+                </span>
+
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="bg-white text-pink-600 px-4 py-2 rounded-lg font-semibold hover:bg-pink-100 transition">
+                        Logout
+                    </button>
+                </form>
+            </div>
         </div>
+    </nav>
 
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
+    <!-- Hero -->
+    <section class="container mx-auto px-6 py-10">
+        <div class="bg-gradient-to-r from-pink-500 to-pink-700 rounded-3xl p-10 text-white shadow-xl">
+            <h2 class="text-4xl font-bold mb-3">
+                Selamat Datang di PING LAUNDRY
+            </h2>
 
-            <x-text-input id="password" class="mt-2 block w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <p class="text-pink-100 text-lg">
+                Solusi Laundry Cepat, Bersih, Wangi, dan Profesional.
+            </p>
         </div>
+    </section>
 
-        <div class="flex items-center justify-between gap-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-slate-300 text-teal-600 shadow-sm focus:ring-teal-500" name="remember">
-                <span class="ms-2 text-sm text-slate-600">{{ __('Remember me') }}</span>
-            </label>
+    <!-- Statistik -->
+    <section class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
 
-            @if (Route::has('password.request'))
-                <a class="rounded-md text-sm font-medium text-teal-700 hover:text-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+            <div class="bg-white rounded-2xl p-6 shadow-md">
+                <h3 class="text-gray-500">Total Pelanggan</h3>
+                <p class="text-3xl font-bold text-pink-600 mt-2">125</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-md">
+                <h3 class="text-gray-500">Order Hari Ini</h3>
+                <p class="text-3xl font-bold text-pink-600 mt-2">32</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-md">
+                <h3 class="text-gray-500">Sedang Diproses</h3>
+                <p class="text-3xl font-bold text-pink-600 mt-2">18</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-md">
+                <h3 class="text-gray-500">Pendapatan</h3>
+                <p class="text-3xl font-bold text-pink-600 mt-2">
+                    Rp 2,5 Jt
+                </p>
+            </div>
+
         </div>
+    </section>
 
-        <div class="flex items-center justify-end">
-            <x-primary-button class="w-full">
-                {{ __('Log in') }}
-            </x-primary-button>
+    <!-- Menu Cepat -->
+    <section class="container mx-auto px-6 py-10">
+        <h2 class="text-2xl font-bold text-gray-700 mb-6">
+            Menu Cepat
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <a href="#" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition">
+                <div class="text-5xl mb-3">🧺</div>
+                <h3 class="font-bold text-xl text-pink-600">
+                    Data Laundry
+                </h3>
+                <p class="text-gray-500">
+                    Kelola pesanan laundry pelanggan.
+                </p>
+            </a>
+
+            <a href="#" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition">
+                <div class="text-5xl mb-3">👥</div>
+                <h3 class="font-bold text-xl text-pink-600">
+                    Pelanggan
+                </h3>
+                <p class="text-gray-500">
+                    Lihat data seluruh pelanggan.
+                </p>
+            </a>
+
+            <a href="#" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition">
+                <div class="text-5xl mb-3">💰</div>
+                <h3 class="font-bold text-xl text-pink-600">
+                    Laporan
+                </h3>
+                <p class="text-gray-500">
+                    Pantau pemasukan dan transaksi.
+                </p>
+            </a>
+
         </div>
-    </form>
-</x-guest-layout>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-10">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-500">
+            © {{ date('Y') }} PING LAUNDRY — Cepat • Bersih • Wangi
+        </div>
+    </footer>
+
+</div>
+@endsection
