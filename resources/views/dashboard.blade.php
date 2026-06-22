@@ -1,240 +1,127 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PING LAUNDRY</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        body{
-            font-family:'Segoe UI',sans-serif;
-            background:#fff5f8;
-        }
-
-        .navbar{
-            background:white;
-            box-shadow:0 2px 10px rgba(0,0,0,.05);
-        }
-
-        .navbar-brand{
-            color:#ff4f9d !important;
-            font-weight:700;
-            font-size:1.5rem;
-        }
-
-        .hero{
-            min-height:90vh;
-            display:flex;
-            align-items:center;
-            background:
-            linear-gradient(
-            135deg,
-            #ff4f9d,
-            #ff7eb3);
-            color:white;
-        }
-
-        .hero h1{
-            font-size:4rem;
-            font-weight:800;
-        }
-
-        .hero p{
-            font-size:1.2rem;
-            margin-top:15px;
-        }
-
-        .btn-pink{
-            background:white;
-            color:#ff4f9d;
-            border:none;
-            font-weight:600;
-            padding:12px 30px;
-            border-radius:50px;
-        }
-
-        .btn-pink:hover{
-            background:#ffe3ef;
-        }
-
-        .feature-card{
-            border:none;
-            border-radius:20px;
-            box-shadow:0 5px 20px rgba(0,0,0,.08);
-            transition:.3s;
-        }
-
-        .feature-card:hover{
-            transform:translateY(-8px);
-        }
-
-        .section-title{
-            color:#ff4f9d;
-            font-weight:700;
-        }
-
-        .footer{
-            background:#ff4f9d;
-            color:white;
-        }
-    </style>
-</head>
-<body>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="#">
-            🧺 PING LAUNDRY
-        </a>
-
-        <div>
-            <a href="/login" class="btn btn-outline-danger me-2">
-                Login
-            </a>
-
-            <a href="/register" class="btn btn-danger">
-                Daftar
-            </a>
-        </div>
-    </div>
-</nav>
-
-<!-- Hero Section -->
-<section class="hero">
-    <div class="container">
-
-        <div class="row align-items-center">
-
-            <div class="col-md-6">
-                <h1>
-                    PING LAUNDRY
-                </h1>
-
-                <p>
-                    Solusi laundry modern, cepat, bersih, dan terpercaya.
-                    Antar jemput laundry langsung ke rumah Anda.
-                </p>
-
-                <div class="mt-4">
-                    <a href="/dashboard" class="btn btn-pink me-2">
-                        Dashboard
-                    </a>
-
-                    <a href="#layanan" class="btn btn-outline-light">
-                        Lihat Layanan
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-6 text-center">
-                <img
-                    src="https://cdn-icons-png.flaticon.com/512/2933/2933245.png"
-                    width="350"
-                    class="img-fluid"
-                    alt="Laundry">
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- Layanan -->
-<section id="layanan" class="py-5">
-    <div class="container">
-
-        <h2 class="text-center section-title mb-5">
-            Layanan Kami
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard Utama') }}
         </h2>
+    </x-slot>
 
-        <div class="row">
-
-            <div class="col-md-3 mb-4">
-                <div class="card feature-card p-4 text-center">
-                    <h1>👕</h1>
-                    <h5>Cuci Kering</h5>
-                    <p>Pakaian bersih dan wangi.</p>
+    <!-- Background dengan nuansa Pink lembut -->
+    <div class="py-12 bg-gradient-to-b from-pink-50/50 to-white min-h-[calc(100vh-65px)]">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
+            
+            <!-- Welcome Header Card -->
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-2xl border border-pink-100 p-8 flex flex-col md:flex-row justify-between items-center gap-6 relative">
+                <!-- Bubble Hiasan -->
+                <div class="absolute right-0 top-0 w-24 h-24 rounded-full bg-pink-500/5 -translate-y-6 translate-x-6"></div>
+                
+                <div class="space-y-2">
+                    <h3 class="text-3xl font-black text-gray-800">Halo, {{ Auth::user()->name }}! 👋</h3>
+                    <p class="text-gray-500 text-sm">
+                        Selamat datang kembali di panel kontrol PING! Laundry. Status login Anda sebagai: 
+                        <span class="px-3 py-1 text-xs font-bold uppercase rounded-full bg-pink-100 text-pink-700 border border-pink-200">
+                            {{ Auth::user()->role }}
+                        </span>
+                    </p>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <span class="text-sm text-gray-400 font-medium">Hari ini: {{ date('d M Y') }}</span>
+                    <span class="text-2xl">🧺</span>
                 </div>
             </div>
 
-            <div class="col-md-3 mb-4">
-                <div class="card feature-card p-4 text-center">
-                    <h1>🧺</h1>
-                    <h5>Cuci Setrika</h5>
-                    <p>Praktis dan siap pakai.</p>
-                </div>
-            </div>
+            <!-- MENU UTAMA BERDASARKAN ROLE -->
+            @if(Auth::user()->role === 'admin' || Auth::user()->role === 'staff')
+                
+                <!-- Tampilan Khusus ADMIN & STAFF -->
+                <div class="space-y-6">
+                    <div class="flex items-center gap-2">
+                        <span class="h-6 w-2 rounded-full bg-pink-600"></span>
+                        <h4 class="text-lg font-bold text-gray-800 uppercase tracking-wide">Menu Manajemen Admin</h4>
+                    </div>
 
-            <div class="col-md-3 mb-4">
-                <div class="card feature-card p-4 text-center">
-                    <h1>⚡</h1>
-                    <h5>Express</h5>
-                    <p>Selesai dalam hitungan jam.</p>
-                </div>
-            </div>
+                    <!-- Grid Card Menu Utama -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Kelola Pesanan -->
+                        <a href="{{ route('pesanan.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
+                            <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">📦</span>
+                            <div>
+                                <h5 class="font-bold text-gray-800 text-lg">Kelola Pesanan</h5>
+                                <p class="text-xs text-gray-400 mt-1">Input cucian baru & kelola progres cucian aktif.</p>
+                            </div>
+                        </a>
 
-            <div class="col-md-3 mb-4">
-                <div class="card feature-card p-4 text-center">
-                    <h1>🚚</h1>
-                    <h5>Pickup Delivery</h5>
-                    <p>Antar jemput ke lokasi Anda.</p>
+                        <!-- Pengecekan Barang -->
+                        <a href="{{ route('pesanan.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
+                            <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">🔍</span>
+                            <div>
+                                <h5 class="font-bold text-gray-800 text-lg">Pengecekan Fisik</h5>
+                                <p class="text-xs text-gray-400 mt-1">Lakukan sortir & checklist temuan barang di saku.</p>
+                            </div>
+                        </a>
+
+                        <!-- Konfirmasi Pembayaran -->
+                        <a href="{{ route('pembayaran.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
+                            <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">💵</span>
+                            <div>
+                                <h5 class="font-bold text-gray-800 text-lg">Pembayaran</h5>
+                                <p class="text-xs text-gray-400 mt-1">Konfirmasi nota lunas & status pembayaran.</p>
+                            </div>
+                        </a>
+
+                        <!-- Laporan Bulanan -->
+                        <a href="{{ route('laporan.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
+                            <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">📊</span>
+                            <div>
+                                <h5 class="font-bold text-gray-800 text-lg">Laporan Keuangan</h5>
+                                <p class="text-xs text-gray-400 mt-1">Cek grafik transaksi mingguan & total omzet.</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
+
+            @else
+                
+                <!-- Tampilan Khusus CUSTOMER (Pelanggan) -->
+                <div class="space-y-6">
+                    <div class="flex items-center gap-2">
+                        <span class="h-6 w-2 rounded-full bg-pink-600"></span>
+                        <h4 class="text-lg font-bold text-gray-800 uppercase tracking-wide">Menu Pelanggan</h4>
+                    </div>
+
+                    <!-- Grid Card Menu Utama -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <!-- Pesanan Baru -->
+                        <a href="{{ route('pesanan.create') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
+                            <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">➕</span>
+                            <div>
+                                <h5 class="font-bold text-gray-800 text-lg">Buat Pesanan Baru</h5>
+                                <p class="text-xs text-gray-400 mt-1">Kirim cucian baru Anda langsung ke outlet.</p>
+                            </div>
+                        </a>
+
+                        <!-- Lacak Status Pakaian -->
+                        <a href="{{ route('pesanan.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
+                            <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">🔍</span>
+                            <div>
+                                <h5 class="font-bold text-gray-800 text-lg">Lacak Cucian</h5>
+                                <p class="text-xs text-gray-400 mt-1">Lihat status pengerjaan pakaian secara real-time.</p>
+                            </div>
+                        </a>
+
+                        <!-- Riwayat Pesanan -->
+                        <a href="{{ route('history.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
+                            <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">📜</span>
+                            <div>
+                                <h5 class="font-bold text-gray-800 text-lg">Riwayat Pesanan</h5>
+                                <p class="text-xs text-gray-400 mt-1">Lihat kembali detail nota pembayaran Anda terdahulu.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            @endif
 
         </div>
-
     </div>
-</section>
-
-<!-- Statistik -->
-<section class="py-5 bg-white">
-    <div class="container">
-
-        <div class="row text-center">
-
-            <div class="col-md-3">
-                <h2 class="text-danger">1000+</h2>
-                <p>Pelanggan</p>
-            </div>
-
-            <div class="col-md-3">
-                <h2 class="text-danger">5000+</h2>
-                <p>Pesanan</p>
-            </div>
-
-            <div class="col-md-3">
-                <h2 class="text-danger">99%</h2>
-                <p>Kepuasan</p>
-            </div>
-
-            <div class="col-md-3">
-                <h2 class="text-danger">24/7</h2>
-                <p>Layanan</p>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
-<!-- Footer -->
-<footer class="footer py-4">
-    <div class="container text-center">
-        <h5>PING LAUNDRY</h5>
-        <p class="mb-0">
-            © 2026 PING LAUNDRY. All Rights Reserved.
-        </p>
-    </div>
-</footer>
-
-</body>
-</html>
+</x-app-layout>
