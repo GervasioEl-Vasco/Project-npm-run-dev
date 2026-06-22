@@ -1,47 +1,119 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.app')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+@section('content')
+<div class="min-h-screen bg-pink-50">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    <!-- Navbar -->
+    <nav class="bg-pink-600 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-white">
+                🧺 PING LAUNDRY
+            </h1>
+
+            <div class="flex items-center gap-4">
+                <span class="text-white">
+                    Halo, {{ Auth::user()->name }}
+                </span>
+
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="bg-white text-pink-600 px-4 py-2 rounded-lg font-semibold hover:bg-pink-100 transition">
+                        Logout
+                    </button>
+                </form>
+            </div>
         </div>
+    </nav>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <!-- Hero -->
+    <section class="container mx-auto px-6 py-10">
+        <div class="bg-gradient-to-r from-pink-500 to-pink-700 rounded-3xl p-10 text-white shadow-xl">
+            <h2 class="text-4xl font-bold mb-3">
+                Selamat Datang di PING LAUNDRY
+            </h2>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <p class="text-pink-100 text-lg">
+                Solusi Laundry Cepat, Bersih, Wangi, dan Profesional.
+            </p>
         </div>
+    </section>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
+    <!-- Statistik -->
+    <section class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+            <div class="bg-white rounded-2xl p-6 shadow-md">
+                <h3 class="text-gray-500">Total Pelanggan</h3>
+                <p class="text-3xl font-bold text-pink-600 mt-2">125</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-md">
+                <h3 class="text-gray-500">Order Hari Ini</h3>
+                <p class="text-3xl font-bold text-pink-600 mt-2">32</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-md">
+                <h3 class="text-gray-500">Sedang Diproses</h3>
+                <p class="text-3xl font-bold text-pink-600 mt-2">18</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-md">
+                <h3 class="text-gray-500">Pendapatan</h3>
+                <p class="text-3xl font-bold text-pink-600 mt-2">
+                    Rp 2,5 Jt
+                </p>
+            </div>
+
         </div>
+    </section>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+    <!-- Menu Cepat -->
+    <section class="container mx-auto px-6 py-10">
+        <h2 class="text-2xl font-bold text-gray-700 mb-6">
+            Menu Cepat
+        </h2>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <a href="#" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition">
+                <div class="text-5xl mb-3">🧺</div>
+                <h3 class="font-bold text-xl text-pink-600">
+                    Data Laundry
+                </h3>
+                <p class="text-gray-500">
+                    Kelola pesanan laundry pelanggan.
+                </p>
+            </a>
+
+            <a href="#" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition">
+                <div class="text-5xl mb-3">👥</div>
+                <h3 class="font-bold text-xl text-pink-600">
+                    Pelanggan
+                </h3>
+                <p class="text-gray-500">
+                    Lihat data seluruh pelanggan.
+                </p>
+            </a>
+
+            <a href="#" class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition">
+                <div class="text-5xl mb-3">💰</div>
+                <h3 class="font-bold text-xl text-pink-600">
+                    Laporan
+                </h3>
+                <p class="text-gray-500">
+                    Pantau pemasukan dan transaksi.
+                </p>
+            </a>
+
         </div>
-    </form>
-</x-guest-layout>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-10">
+        <div class="container mx-auto px-6 py-4 text-center text-gray-500">
+            © {{ date('Y') }} PING LAUNDRY — Cepat • Bersih • Wangi
+        </div>
+    </footer>
+
+</div>
+@endsection
