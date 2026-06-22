@@ -1,95 +1,240 @@
-<x-app-layout>
-    <x-slot name="header">
-        <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-                <p class="text-sm font-medium text-teal-700">Dashboard</p>
-                <h1 class="text-2xl font-bold text-slate-950">
-                    {{ Auth::user()?->role === 'admin' ? 'Operasional Laundry' : 'Ringkasan Pesanan' }}
-                </h1>
-            </div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PING LAUNDRY</title>
 
-            <x-button size="sm">
-                {{ Auth::user()?->role === 'admin' ? 'Lihat Laporan' : 'Buat Pesanan' }}
-            </x-button>
-        </div>
-    </x-slot>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    @php
-        $isAdmin = Auth::user()?->role === 'admin';
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
-        $stats = $isAdmin
-            ? [
-                ['label' => 'Pesanan Aktif', 'value' => '24'],
-                ['label' => 'Menunggu Checking', 'value' => '8'],
-                ['label' => 'Pendapatan Hari Ini', 'value' => 'Rp 1,2 jt'],
-            ]
-            : [
-                ['label' => 'Pesanan Berjalan', 'value' => '2'],
-                ['label' => 'Siap Diambil', 'value' => '1'],
-                ['label' => 'Total Transaksi', 'value' => 'Rp 185 rb'],
-            ];
-    @endphp
+        body{
+            font-family:'Segoe UI',sans-serif;
+            background:#fff5f8;
+        }
 
-    <div class="space-y-6">
-        <div class="grid gap-4 md:grid-cols-3">
-            @foreach ($stats as $stat)
-                <x-card padding="p-5">
-                    <p class="text-sm font-medium text-slate-500">{{ $stat['label'] }}</p>
-                    <p class="mt-2 text-2xl font-bold text-slate-950">{{ $stat['value'] }}</p>
-                </x-card>
-            @endforeach
-        </div>
+        .navbar{
+            background:white;
+            box-shadow:0 2px 10px rgba(0,0,0,.05);
+        }
 
-        <div class="grid gap-6 xl:grid-cols-[1.4fr_1fr]">
-            <x-card>
-                <div class="flex items-center justify-between gap-4">
-                    <div>
-                        <h2 class="text-base font-semibold text-slate-950">
-                            {{ $isAdmin ? 'Antrian Pesanan' : 'Status Terbaru' }}
-                        </h2>
-                        <p class="mt-1 text-sm text-slate-500">
-                            {{ $isAdmin ? 'Pantau status pekerjaan dari masuk sampai selesai.' : 'Pantau progres laundry yang sedang berjalan.' }}
-                        </p>
-                    </div>
-                </div>
+        .navbar-brand{
+            color:#ff4f9d !important;
+            font-weight:700;
+            font-size:1.5rem;
+        }
 
-                <div class="mt-6 space-y-3">
-                    @foreach (['Diterima', 'Dicuci', 'Disetrika', 'Siap Diambil'] as $index => $status)
-                        <div class="flex items-center gap-4 rounded-lg border border-slate-200 p-4">
-                            <div @class([
-                                'flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-semibold',
-                                'bg-teal-600 text-white' => $index === 0,
-                                'bg-slate-100 text-slate-500' => $index !== 0,
-                            ])>
-                                {{ $index + 1 }}
-                            </div>
-                            <div class="min-w-0 flex-1">
-                                <p class="font-medium text-slate-900">{{ $status }}</p>
-                                <p class="text-sm text-slate-500">Order #LDY-00{{ $index + 1 }}</p>
-                            </div>
-                            <span class="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700">
-                                Aktif
-                            </span>
-                        </div>
-                    @endforeach
-                </div>
-            </x-card>
+        .hero{
+            min-height:90vh;
+            display:flex;
+            align-items:center;
+            background:
+            linear-gradient(
+            135deg,
+            #ff4f9d,
+            #ff7eb3);
+            color:white;
+        }
 
-            <x-card>
-                <h2 class="text-base font-semibold text-slate-950">
-                    {{ $isAdmin ? 'Prioritas Hari Ini' : 'Aksi Cepat' }}
-                </h2>
+        .hero h1{
+            font-size:4rem;
+            font-weight:800;
+        }
 
-                <div class="mt-5 space-y-3">
-                    <x-alert variant="info" title="{{ $isAdmin ? 'Cek order baru' : 'Ambil pesanan' }}">
-                        {{ $isAdmin ? 'Pastikan pesanan masuk sudah melalui tahap checking.' : 'Pesanan yang sudah selesai dapat diambil di outlet.' }}
-                    </x-alert>
+        .hero p{
+            font-size:1.2rem;
+            margin-top:15px;
+        }
 
-                    <x-alert variant="success" title="{{ $isAdmin ? 'Laporan siap' : 'Pembayaran aman' }}">
-                        {{ $isAdmin ? 'Ringkasan transaksi harian siap ditinjau.' : 'Simpan bukti pembayaran untuk verifikasi.' }}
-                    </x-alert>
-                </div>
-            </x-card>
+        .btn-pink{
+            background:white;
+            color:#ff4f9d;
+            border:none;
+            font-weight:600;
+            padding:12px 30px;
+            border-radius:50px;
+        }
+
+        .btn-pink:hover{
+            background:#ffe3ef;
+        }
+
+        .feature-card{
+            border:none;
+            border-radius:20px;
+            box-shadow:0 5px 20px rgba(0,0,0,.08);
+            transition:.3s;
+        }
+
+        .feature-card:hover{
+            transform:translateY(-8px);
+        }
+
+        .section-title{
+            color:#ff4f9d;
+            font-weight:700;
+        }
+
+        .footer{
+            background:#ff4f9d;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            🧺 PING LAUNDRY
+        </a>
+
+        <div>
+            <a href="/login" class="btn btn-outline-danger me-2">
+                Login
+            </a>
+
+            <a href="/register" class="btn btn-danger">
+                Daftar
+            </a>
         </div>
     </div>
-</x-app-layout>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+                <h1>
+                    PING LAUNDRY
+                </h1>
+
+                <p>
+                    Solusi laundry modern, cepat, bersih, dan terpercaya.
+                    Antar jemput laundry langsung ke rumah Anda.
+                </p>
+
+                <div class="mt-4">
+                    <a href="/dashboard" class="btn btn-pink me-2">
+                        Dashboard
+                    </a>
+
+                    <a href="#layanan" class="btn btn-outline-light">
+                        Lihat Layanan
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 text-center">
+                <img
+                    src="https://cdn-icons-png.flaticon.com/512/2933/2933245.png"
+                    width="350"
+                    class="img-fluid"
+                    alt="Laundry">
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Layanan -->
+<section id="layanan" class="py-5">
+    <div class="container">
+
+        <h2 class="text-center section-title mb-5">
+            Layanan Kami
+        </h2>
+
+        <div class="row">
+
+            <div class="col-md-3 mb-4">
+                <div class="card feature-card p-4 text-center">
+                    <h1>👕</h1>
+                    <h5>Cuci Kering</h5>
+                    <p>Pakaian bersih dan wangi.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <div class="card feature-card p-4 text-center">
+                    <h1>🧺</h1>
+                    <h5>Cuci Setrika</h5>
+                    <p>Praktis dan siap pakai.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <div class="card feature-card p-4 text-center">
+                    <h1>⚡</h1>
+                    <h5>Express</h5>
+                    <p>Selesai dalam hitungan jam.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <div class="card feature-card p-4 text-center">
+                    <h1>🚚</h1>
+                    <h5>Pickup Delivery</h5>
+                    <p>Antar jemput ke lokasi Anda.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Statistik -->
+<section class="py-5 bg-white">
+    <div class="container">
+
+        <div class="row text-center">
+
+            <div class="col-md-3">
+                <h2 class="text-danger">1000+</h2>
+                <p>Pelanggan</p>
+            </div>
+
+            <div class="col-md-3">
+                <h2 class="text-danger">5000+</h2>
+                <p>Pesanan</p>
+            </div>
+
+            <div class="col-md-3">
+                <h2 class="text-danger">99%</h2>
+                <p>Kepuasan</p>
+            </div>
+
+            <div class="col-md-3">
+                <h2 class="text-danger">24/7</h2>
+                <p>Layanan</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer py-4">
+    <div class="container text-center">
+        <h5>PING LAUNDRY</h5>
+        <p class="mb-0">
+            © 2026 PING LAUNDRY. All Rights Reserved.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
