@@ -22,11 +22,11 @@
 
             <div class="flex justify-between text-sm text-gray-600 mb-6">
                 <div>
-                    <p><span class="font-bold text-gray-800">No. Nota:</span> #ORD-{{ $payment->order->id }}</p>
+                    <p><span class="font-bold text-gray-800">No. Nota:</span> #ORD-{{ $payment->pesanan->id }}</p>
                     <p><span class="font-bold text-gray-800">Tanggal:</span> {{ $payment->created_at }}</p>
                 </div>
                 <div class="text-right">
-                    <p><span class="font-bold text-gray-800">Pelanggan:</span> {{ $payment->order->user->name }}</p>
+                    <p><span class="font-bold text-gray-800">Pelanggan:</span> {{ $payment->pesanan->user->name }}</p>
                     <p><span class="font-bold text-gray-800">Kasir:</span> Admin</p>
                 </div>
             </div>
@@ -41,9 +41,9 @@
                 </thead>
                 <tbody>
                     <tr class="border-b border-gray-100">
-                        <td class="py-3 text-gray-600">{{ $payment->order->service->name }}</td>
-                        <td class="text-center py-3 text-gray-600">{{ $payment->order->weight }} Kg</td>
-                        <td class="text-right py-3 text-gray-800 font-medium">Rp {{ number_format($payment->order->total_price, 0, ',', '.') }}</td>
+                        <td class="py-3 text-gray-600">{{ $payment->pesanan->layanan->nama_layanan }}</td>
+                        <td class="text-center py-3 text-gray-600">{{ $payment->pesanan->berat_jumlah }} Kg</td>
+                        <td class="text-right py-3 text-gray-800 font-medium">Rp {{ number_format($payment->pesanan->total_harga, 0, ',', '.') }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -51,21 +51,21 @@
             <div class="flex flex-col items-end text-sm">
                 <div class="flex justify-between w-1/2 mb-1">
                     <span class="text-gray-600">Total Tagihan:</span>
-                    <span class="font-bold text-gray-800">Rp {{ number_format($payment->order->total_price, 0, ',', '.') }}</span>
+                    <span class="font-bold text-gray-800">Rp {{ number_format($payment->pesanan->total_harga, 0, ',', '.') }}</span>
                 </div>
                 <div class="flex justify-between w-1/2 mb-1">
                     <span class="text-gray-600">Uang Tunai:</span>
-                    <span class="text-gray-800">Rp {{ number_format($payment->amount, 0, ',', '.') }}</span>
+                    <span class="text-gray-800">Rp {{ number_format($payment->nominal, 0, ',', '.') }}</span>
                 </div>
                 <div class="flex justify-between w-1/2 border-t border-gray-300 pt-1 mt-1">
                     <span class="font-bold text-gray-800">Kembalian:</span>
-                    <span class="font-bold text-indigo-600">Rp {{ number_format($payment->amount - $payment->order->total_price, 0, ',', '.') }}</span>
+                    <span class="font-bold text-indigo-600">Rp {{ number_format($payment->nominal - $payment->pesanan->total_harga, 0, ',', '.') }}</span>
                 </div>
             </div>
 
             <div class="text-center mt-8 pt-6 border-t-2 border-dashed border-gray-300 text-sm text-gray-500">
                 <p>Terima kasih telah mempercayakan cucian Anda!</p>
-                <p>Status Cucian: <span class="font-bold text-gray-800 uppercase">{{ $payment->order->status }}</span></p>
+                <p>Status Cucian: <span class="font-bold text-gray-800 uppercase">{{ $payment->pesanan->status_pesanan }}</span></p>
             </div>
             
         </div>

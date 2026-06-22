@@ -11,7 +11,7 @@
                 
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-lg font-bold">Data Pesanan Aktif</h3>
-                    <a href="{{ route('orders.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    <a href="{{ route('pesanan.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                         + Pesanan Baru
                     </a>
                 </div>
@@ -30,20 +30,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($orders as $order)
+                            @forelse($pesanan as $pesanan_item)
                             <tr class="hover:bg-gray-50">
-                                <td class="py-2 px-4 border-b text-sm">#ORD-{{ $order->id }}</td>
-                                <td class="py-2 px-4 border-b text-sm">{{ $order->user->name }}</td>
-                                <td class="py-2 px-4 border-b text-sm">{{ $order->service->name }}</td>
-                                <td class="py-2 px-4 border-b text-sm">{{ $order->weight }} Kg</td>
-                                <td class="py-2 px-4 border-b text-sm">Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
+                                <td class="py-2 px-4 border-b text-sm">#ORD-{{ $pesanan_item->id }}</td>
+                                <td class="py-2 px-4 border-b text-sm">{{ $pesanan_item->user->name }}</td>
+                                <td class="py-2 px-4 border-b text-sm">{{ $pesanan_item->layanan->nama_layanan }}</td>
+                                <td class="py-2 px-4 border-b text-sm">{{ $pesanan_item->berat_jumlah }} Kg</td>
+                                <td class="py-2 px-4 border-b text-sm">Rp {{ number_format($pesanan_item->total_harga, 0, ',', '.') }}</td>
                                 <td class="py-2 px-4 border-b text-sm">
                                     <span class="px-2 py-1 bg-yellow-200 text-yellow-800 rounded-full text-xs font-bold uppercase">
-                                        {{ $order->status }}
+                                        {{ $pesanan_item->status_pesanan }}
                                     </span>
                                 </td>
                                 <td class="py-2 px-4 border-b text-sm flex gap-2">
-                                    <a href="{{ route('payments.create', $order->id) }}" class="text-blue-600 hover:text-blue-900 underline">Bayar</a>
+                                    <a href="{{ route('pembayaran.create', $pesanan_item->id) }}" class="text-blue-600 hover:text-blue-900 underline">Bayar</a>
                                     </td>
                             </tr>
                             @empty
