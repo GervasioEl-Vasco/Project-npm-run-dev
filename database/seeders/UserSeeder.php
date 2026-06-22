@@ -13,9 +13,10 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Create admin user
-        User::create([
-            'name' => 'Admin User',
+        User::updateOrCreate([
             'email' => 'admin@pinglaundry.com',
+        ], [
+            'name' => 'Admin User',
             'password' => bcrypt('password123'),
             'phone' => '08123456789',
             'address' => 'Jl. Laundry No. 1',
@@ -24,9 +25,10 @@ class UserSeeder extends Seeder
         ]);
 
         // Create staff user
-        User::create([
-            'name' => 'Staff User',
+        User::updateOrCreate([
             'email' => 'staff@pinglaundry.com',
+        ], [
+            'name' => 'Staff User',
             'password' => bcrypt('password123'),
             'phone' => '08123456790',
             'address' => 'Jl. Laundry No. 2',
@@ -34,9 +36,17 @@ class UserSeeder extends Seeder
             'is_active' => true,
         ]);
 
-        // Create sample customers
-        User::factory(5)->create([
-            'role' => 'customer',
-        ]);
+        for ($i = 1; $i <= 5; $i++) {
+            User::updateOrCreate([
+                'email' => "customer{$i}@pinglaundry.com",
+            ], [
+                'name' => "Customer {$i}",
+                'password' => bcrypt('password123'),
+                'phone' => '0812345679' . $i,
+                'address' => "Jl. Customer No. {$i}",
+                'role' => 'customer',
+                'is_active' => true,
+            ]);
+        }
     }
 }

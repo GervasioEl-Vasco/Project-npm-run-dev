@@ -5,18 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pembayaran extends Model
+class LogStatus extends Model
 {
     use HasFactory;
 
-    protected $table = 'pembayaran';
+    protected $table = 'log_status_pesanan';
 
     protected $fillable = [
         'pesanan_id',
-        'nominal',
-        'metode_pembayaran',
-        'bukti_bayar',
-        'status',
+        'status_sebelumnya',
+        'status_baru',
+        'keterangan',
     ];
 
     public function pesanan()
