@@ -29,43 +29,6 @@
         </div>
         
         <div>
-<<<<<<< HEAD
-            <a href="{{ route('login') }}" class="btn btn-outline-danger me-2">
-                Login
-            </a>
-
-            <a href="{{ route('register') }}" class="btn btn-danger">
-                Daftar
-            </a>
-        </div>
-    </div>
-</nav>
-
-<!-- Hero Section -->
-<section class="hero">
-    <div class="container">
-
-        <div class="row align-items-center">
-
-            <div class="col-md-6">
-                <h1>
-                    PING LAUNDRY
-                </h1>
-
-                <p>
-                    Solusi laundry modern, cepat, bersih, dan terpercaya.
-                    Antar jemput laundry langsung ke rumah Anda.
-                </p>
-
-                <div class="mt-4">
-                    <a href="{{ route('dashboard') }}" class="btn btn-pink me-2">
-                        Dashboard
-                    </a>
-
-                    <a href="#layanan" class="btn btn-outline-light">
-                        Lihat Layanan
-                    </a>
-=======
             @if (Route::has('login'))
                 <div class="flex items-center gap-4">
                     @auth
@@ -80,7 +43,6 @@
                             </a>
                         @endif
                     @endauth
->>>>>>> ui-ux
                 </div>
             @endif
         </div>
