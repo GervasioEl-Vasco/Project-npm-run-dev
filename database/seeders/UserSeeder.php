@@ -36,17 +36,16 @@ class UserSeeder extends Seeder
             'is_active' => true,
         ]);
 
-        for ($i = 1; $i <= 5; $i++) {
             User::updateOrCreate([
-                'email' => "customer{$i}@pinglaundry.com",
+                'email' => "customer@pinglaundry.com",
             ], [
-                'name' => "Customer {$i}",
+                'name' => "Customer",
                 'password' => bcrypt('password123'),
-                'phone' => '0812345679' . $i,
-                'address' => "Jl. Customer No. {$i}",
+                'phone' => '08123456790',
+                'address' => "Jl. Customer No. 1",
                 'role' => 'customer',
                 'is_active' => true,
             ]);
-        }
+        
     }
 }

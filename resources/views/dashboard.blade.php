@@ -41,7 +41,7 @@
                     </div>
 
                     <!-- Grid Card Menu Utama -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                         <!-- Kelola Pesanan -->
                         <a href="{{ route('pesanan.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
                             <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">📦</span>
@@ -51,14 +51,6 @@
                             </div>
                         </a>
 
-                        <!-- Pengecekan Barang -->
-                        <a href="{{ route('pengecekan.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
-                            <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">🔍</span>
-                            <div>
-                                <h5 class="font-bold text-gray-800 text-lg">Pengecekan Fisik</h5>
-                                <p class="text-xs text-gray-400 mt-1">Lakukan sortir & checklist temuan barang di saku.</p>
-                            </div>
-                        </a>
 
                         <!-- Konfirmasi Pembayaran -->
                         <a href="{{ route('pembayaran.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
@@ -90,7 +82,7 @@
                     </div>
 
                     <!-- Grid Card Menu Utama -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <!-- Pesanan Baru -->
                         <a href="{{ route('pesanan.create') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
                             <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">➕</span>
@@ -100,14 +92,6 @@
                             </div>
                         </a>
 
-                        <!-- Lacak Status Pakaian -->
-                        <a href="{{ route('tracking.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
-                            <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">🔍</span>
-                            <div>
-                                <h5 class="font-bold text-gray-800 text-lg">Lacak Cucian</h5>
-                                <p class="text-xs text-gray-400 mt-1">Lihat status pengerjaan pakaian secara real-time.</p>
-                            </div>
-                        </a>
 
                         <!-- Riwayat Pesanan -->
                         <a href="{{ route('riwayat-pesanan.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">

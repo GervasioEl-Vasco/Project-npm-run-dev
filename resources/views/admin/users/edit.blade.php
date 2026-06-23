@@ -12,10 +12,10 @@
                 <form action="{{ route('admin.users.update', $user->id) }}" method="POST"
                       x-data="{ 
                           name: '{{ $user->name }}', 
-                          email: '{{ $user->email }}', 
-                          phone: '{{ $user->phone_number ?? '' }}', 
+                          email: '{{ old('email', $user->email) }}', 
+                          phone: '{{ old('phone', $user->phone ?? '') }}', 
                           password: '', 
-                          role: '{{ $user->role ?? 'pelanggan' }}',
+                          role: '{{ old('role', $user->role ?? 'customer') }}',
                           emailRegex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
                           get isEmailValid() { return this.emailRegex.test(this.email) },
                           get isFormValid() { 
@@ -32,6 +32,9 @@
                         <label for="name" class="block text-sm font-bold text-gray-700 mb-1">Nama Lengkap</label>
                         <input type="text" name="name" id="name" required x-model="name"
                                class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
+                        @error('name')
+                            <div class="text-xs text-red-500 mt-1">* {{ $message }}</div>
+                        @enderror
                         <div class="text-xs text-red-500 mt-1" x-show="name.length > 0 && name.length < 3">
                             * Nama minimal 3 karakter.
                         </div>
@@ -42,6 +45,9 @@
                         <label for="email" class="block text-sm font-bold text-gray-700 mb-1">Alamat Email</label>
                         <input type="email" name="email" id="email" required x-model="email"
                                class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
+                        @error('email')
+                            <div class="text-xs text-red-500 mt-1">* {{ $message }}</div>
+                        @enderror
                         <div class="text-xs text-red-500 mt-1" x-show="email.length > 0 && !isEmailValid">
                             * Masukkan alamat email yang valid.
                         </div>
@@ -49,9 +55,12 @@
 
                     <!-- No. HP -->
                     <div class="mb-5">
-                        <label for="phone_number" class="block text-sm font-bold text-gray-700 mb-1">Nomor WhatsApp / HP</label>
-                        <input type="text" name="phone_number" id="phone_number" x-model="phone"
+                        <label for="phone" class="block text-sm font-bold text-gray-700 mb-1">Nomor WhatsApp / HP</label>
+                        <input type="text" name="phone" id="phone" x-model="phone"
                                class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
+                        @error('phone')
+                            <div class="text-xs text-red-500 mt-1">* {{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Password -->
@@ -60,6 +69,9 @@
                         <input type="password" name="password" id="password" x-model="password"
                                class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm"
                                placeholder="Biarkan kosong jika tidak ingin mengubah sandi">
+                        @error('password')
+                            <div class="text-xs text-red-500 mt-1">* {{ $message }}</div>
+                        @enderror
                         <div class="text-xs text-red-500 mt-1" x-show="password.length > 0 && password.length < 8">
                             * Kata sandi minimal 8 karakter.
                         </div>
@@ -70,9 +82,13 @@
                         <label for="role" class="block text-sm font-bold text-gray-700 mb-1">Peran Akses</label>
                         <select name="role" id="role" required x-model="role"
                                 class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
-                            <option value="pelanggan">Pelanggan</option>
+                            <option value="customer">Pelanggan</option>
+                            <option value="staff">Staff</option>
                             <option value="admin">Admin / Kasir</option>
                         </select>
+                        @error('role')
+                            <div class="text-xs text-red-500 mt-1">* {{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="flex items-center justify-end gap-4 border-t pt-5">

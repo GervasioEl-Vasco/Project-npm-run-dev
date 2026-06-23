@@ -17,16 +17,25 @@
                       }">
                     @csrf
 
-                    <div class="mb-4">
-                        <label for="user_id" class="block text-sm font-medium text-gray-700">Pelanggan</label>
-                        <select name="user_id" id="user_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                            <option value="">-- Pilih Pelanggan --</option>
-                            @foreach($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->phone }}</option>
-                            @endforeach
-                        </select>
-                        @error('user_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                    </div>
+                    @if(auth()->user()->role === 'customer')
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Data Pelanggan</label>
+                            <input type="text" disabled value="{{ auth()->user()->name }} ({{ auth()->user()->phone }})" 
+                                   class="mt-1 block w-full rounded-md border-gray-300 bg-gray-100 shadow-sm text-gray-600 cursor-not-allowed">
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                        </div>
+                    @else
+                        <div class="mb-4">
+                            <label for="user_id" class="block text-sm font-medium text-gray-700">Pilih Pelanggan</label>
+                            <select name="user_id" id="user_id" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                <option value="">-- Pilih Pelanggan --</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }} - {{ $user->phone }}</option>
+                                @endforeach
+                            </select>
+                            @error('user_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                        </div>
+                    @endif
 
                     <div class="mb-4">
                         <label for="layanan_id" class="block text-sm font-medium text-gray-700">Jenis Layanan</label>

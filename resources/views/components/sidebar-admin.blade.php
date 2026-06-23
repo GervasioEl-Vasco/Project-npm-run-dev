@@ -2,7 +2,6 @@
     $items = [
         ['label' => 'Dashboard', 'route' => 'dashboard', 'active' => 'dashboard'],
         ['label' => 'Kelola Pesanan', 'route' => 'pesanan.index', 'active' => 'pesanan.*'],
-        ['label' => 'Checking & Status', 'route' => 'pesanan.index', 'active' => 'pengecekan.*'],
         ['label' => 'Laporan Keuangan', 'route' => 'laporan.index', 'active' => 'laporan.*'],
         ['label' => 'Manajemen Pengguna', 'route' => 'admin.users.index', 'active' => 'admin.users.*'],
     ];
@@ -30,14 +29,7 @@
                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
                 Kelola Pesanan
             </a>
-            <!-- Checking & Status -->
-            <a href="{{ route('pengecekan.index') }}" 
-               class="flex items-center px-4 py-2.5 rounded-lg font-medium transition-colors 
-                      {{ request()->routeIs('pengecekan.*') 
-                         ? 'text-gray-700 bg-brand-50 border-l-4 border-brand-600' 
-                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
-                Checking & Status
-            </a>
+
             <!-- Laporan Keuangan -->
             <a href="{{ route('laporan.index') }}" 
                class="flex items-center px-4 py-2.5 rounded-lg font-medium transition-colors 
