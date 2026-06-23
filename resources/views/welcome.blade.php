@@ -86,17 +86,17 @@
                 <div class="space-y-3">
                     <div class="flex justify-between items-center text-sm p-3 bg-white rounded-xl shadow-sm border border-pink-50 hover:-translate-y-0.5 transition duration-200">
                         <span class="font-semibold text-gray-800">Cuci Kering Standar</span>
-                        <span class="font-bold text-pink-600">Rp 5.000 <span class="text-xs text-gray-400 font-normal">/ Kg</span></span>
+                        <span class="font-bold text-pink-600">Rp 7.000 <span class="text-xs text-gray-400 font-normal">/ Kg</span></span>
                     </div>
                     
                     <div class="flex justify-between items-center text-sm p-3 bg-white rounded-xl shadow-sm border border-pink-50 hover:-translate-y-0.5 transition duration-200">
                         <span class="font-semibold text-gray-800">Cuci Setrika Reguler</span>
-                        <span class="font-bold text-pink-600">Rp 8.000 <span class="text-xs text-gray-400 font-normal">/ Kg</span></span>
+                        <span class="font-bold text-pink-600">Rp 10.000 <span class="text-xs text-gray-400 font-normal">/ Kg</span></span>
                     </div>
                     
                     <div class="flex justify-between items-center text-sm p-3 bg-white rounded-xl shadow-sm border border-pink-50 hover:-translate-y-0.5 transition duration-200">
-                        <span class="font-semibold text-gray-800">Cuci Setrika Express (1 Hari)</span>
-                        <span class="font-bold text-pink-600">Rp 12.000 <span class="text-xs text-gray-400 font-normal">/ Kg</span></span>
+                        <span class="font-semibold text-gray-800">Setrika Saja</span>
+                        <span class="font-bold text-pink-600">Rp 5.000 <span class="text-xs text-gray-400 font-normal">/ Kg</span></span>
                     </div>
                 </div>
                 
