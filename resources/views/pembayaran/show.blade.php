@@ -54,14 +54,33 @@
                     <span class="font-bold text-gray-800">Rp {{ number_format($payment->pesanan->total_harga, 0, ',', '.') }}</span>
                 </div>
                 <div class="flex justify-between w-1/2 mb-1">
-                    <span class="text-gray-600">Uang Tunai:</span>
-                    <span class="text-gray-800">Rp {{ number_format($payment->nominal, 0, ',', '.') }}</span>
+                    <span class="text-gray-600">Metode Pembayaran:</span>
+                    <span class="text-gray-800 uppercase">{{ str_replace('_', ' ', $payment->metode_pembayaran) }}</span>
                 </div>
                 <div class="flex justify-between w-1/2 border-t border-gray-300 pt-1 mt-1">
-                    <span class="font-bold text-gray-800">Kembalian:</span>
-                    <span class="font-bold text-indigo-600">Rp {{ number_format($payment->nominal - $payment->pesanan->total_harga, 0, ',', '.') }}</span>
+                    <span class="font-bold text-gray-800">Status Bayar:</span>
+                    <span class="font-bold {{ $payment->status === 'berhasil' ? 'text-green-600' : 'text-yellow-600' }} uppercase">{{ str_replace('_', ' ', $payment->status) }}</span>
                 </div>
             </div>
+
+            @if($payment->bukti_bayar)
+            <div class="mt-6 border-t pt-4">
+                <p class="font-bold text-gray-800 mb-2">Bukti Pembayaran:</p>
+                <img src="{{ asset('storage/' . $payment->bukti_bayar) }}" alt="Bukti Pembayaran" class="w-full max-w-sm mx-auto h-auto rounded-lg shadow-sm border border-gray-200">
+            </div>
+            @endif
+
+            @if($payment->status === 'menunggu_konfirmasi' && in_array(auth()->user()->role, ['admin', 'staff']))
+            <div class="mt-8 text-center noprint">
+                <form action="{{ route('pembayaran.konfirmasi', $payment->id) }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg w-full text-lg shadow-md">
+                        Konfirmasi Pembayaran Valid
+                    </button>
+                </form>
+            </div>
+            @endif
 
             <div class="text-center mt-8 pt-6 border-t-2 border-dashed border-gray-300 text-sm text-gray-500">
                 <p>Terima kasih telah mempercayakan cucian Anda!</p>

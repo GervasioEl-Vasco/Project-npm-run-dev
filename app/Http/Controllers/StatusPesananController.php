@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class StatusPesananController extends Controller
 {
+    public function edit(Pesanan $pesanan)
+    {
+        return view('status.edit', compact('pesanan'));
+    }
+
     public function update(Request $request, Pesanan $pesanan)
     {
         $request->validate([

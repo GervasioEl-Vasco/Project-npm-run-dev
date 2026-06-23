@@ -18,24 +18,40 @@ class PembayaranController extends Controller
     public function store(Request $request, Pesanan $pesanan)
     {
         $request->validate([
-            'amount' => 'required|numeric|min:' . $pesanan->total_harga,
+            'metode_pembayaran' => 'required|string',
+            'bukti_bayar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+
+        $buktiPath = null;
+        if ($request->hasFile('bukti_bayar')) {
+            $buktiPath = $request->file('bukti_bayar')->store('bukti_pembayaran', 'public');
+        }
+
         $pembayaran = Pembayaran::create([
             'pesanan_id' => $pesanan->id,
-            'nominal' => $request->amount,
-            'metode_pembayaran' => 'tunai',
-            'status' => 'berhasil',
+            'nominal' => $pesanan->total_harga,
+            'metode_pembayaran' => $request->metode_pembayaran,
+            'bukti_bayar' => $buktiPath,
+            'status' => 'menunggu_konfirmasi',
         ]);
-        // Tandai pesanan sebagai lunas dan ubah status pesanan ke selesai
-        $pesanan->update([
-            'status_pembayaran' => 'sudah_bayar',
-            'status_pesanan' => 'selesai'
-        ]);
-        return redirect()->route('pembayaran.show', $pembayaran->id)->with('success', 'Pembayaran berhasil dicatat.');
+
+        // Do NOT change status_pesanan here
+        // The staff will manage status_pesanan separately.
+
+        return redirect()->route('pesanan.index')->with('success', 'Bukti pembayaran berhasil diunggah. Menunggu konfirmasi admin/staff.');
     }
+
     public function show(Pembayaran $pembayaran)
     {
         $pembayaran->load(['pesanan.user', 'pesanan.layanan']);
-        return view('pembayaran.show', ['payment' => $pembayaran]);
+        return view('pembayaran.show', compact('pembayaran'));
+    }
+
+    public function konfirmasi(Pembayaran $pembayaran)
+    {
+        $pembayaran->update(['status' => 'berhasil']);
+        $pembayaran->pesanan->update(['status_pembayaran' => 'sudah_bayar']);
+
+        return redirect()->route('pesanan.index')->with('success', 'Pembayaran berhasil dikonfirmasi.');
     }
 }

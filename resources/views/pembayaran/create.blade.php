@@ -15,12 +15,7 @@
                     <p class="text-gray-600">Layanan: {{ $pesanan->layanan->nama_layanan }} ({{ $pesanan->berat_jumlah }} Kg)</p>
                 </div>
 
-                <form action="{{ route('pembayaran.store', $pesanan->id) }}" method="POST"
-                      x-data="{ 
-                          totalTagihan: {{ $pesanan->total_harga }},
-                          jumlahBayar: 0,
-                          get kembalian() { return this.jumlahBayar - this.totalTagihan }
-                      }">
+                <form action="{{ route('pembayaran.store', $pesanan->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="pesanan_id" value="{{ $pesanan->id }}">
 
@@ -32,32 +27,31 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="amount" class="block text-sm font-medium text-gray-700">Uang Diterima (Rp)</label>
-                        <input type="number" name="amount" id="amount" required min="{{ $pesanan->total_harga }}"
-                               x-model.number="jumlahBayar"
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg font-bold">
+                        <label for="metode_pembayaran" class="block text-sm font-medium text-gray-700">Metode Pembayaran</label>
+                        <select name="metode_pembayaran" id="metode_pembayaran" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <option value="transfer_bank">Transfer Bank</option>
+                            <option value="ewallet">E-Wallet (OVO/Dana/Gopay)</option>
+                        </select>
                     </div>
 
-                    <div class="mb-6 p-4 rounded-md" 
-                         x-bind:class="kembalian >= 0 ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'">
-                        <p class="text-sm font-semibold" 
-                           x-bind:class="kembalian >= 0 ? 'text-green-700' : 'text-red-700'">
-                            Kembalian:
-                        </p>
-                        <p class="text-2xl font-bold" 
-                           x-bind:class="kembalian >= 0 ? 'text-green-900' : 'text-red-900'">
-                            Rp <span x-text="kembalian >= 0 ? new Intl.NumberFormat('id-ID').format(kembalian) : '0'">0</span>
-                        </p>
-                        <p x-show="kembalian < 0 && jumlahBayar > 0" class="text-xs text-red-500 mt-1">
-                            *Uang pembayaran belum mencukupi.
-                        </p>
+                    <div class="mb-6">
+                        <label for="bukti_bayar" class="block text-sm font-medium text-gray-700">Upload Bukti Pembayaran</label>
+                        <input type="file" name="bukti_bayar" id="bukti_bayar" required accept="image/*"
+                               class="mt-1 block w-full text-sm text-gray-500
+                                      file:mr-4 file:py-2 file:px-4
+                                      file:rounded-md file:border-0
+                                      file:text-sm file:font-semibold
+                                      file:bg-indigo-50 file:text-indigo-700
+                                      hover:file:bg-indigo-100">
+                        @error('bukti_bayar')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="flex items-center justify-end">
                         <a href="{{ route('pesanan.index') }}" class="text-gray-500 mr-4 hover:underline">Batal</a>
-                        <button type="submit" x-bind:disabled="kembalian < 0" 
-                                class="bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded">
-                            Konfirmasi Pembayaran
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                            Kirim Bukti Pembayaran
                         </button>
                     </div>
                 </form>
