@@ -16,9 +16,17 @@ class StatusPesananController extends Controller
     public function update(Request $request, Pesanan $pesanan)
     {
         $request->validate([
-            'status_pesanan' => 'required|in:menunggu,diproses,selesai,diambil,dibatalkan',
+            'status_pesanan' => 'required|in:menunggu,diproses,selesai,dibatalkan',
             'keterangan' => 'nullable|string'
         ]);
+
+        if ($pesanan->status_pesanan === 'selesai') {
+            return back()->with('error', 'Pesanan ini sudah tutup buku dan statusnya tidak dapat diubah lagi.');
+        }
+
+        if ($request->status_pesanan === 'selesai' && $pesanan->status_pembayaran !== 'sudah_bayar') {
+            return back()->with('error', 'Pesanan tidak dapat diselesaikan karena pembayaran belum lunas atau belum dikonfirmasi.');
+        }
 
         $status_lama = $pesanan->status_pesanan;
         $pesanan->update([

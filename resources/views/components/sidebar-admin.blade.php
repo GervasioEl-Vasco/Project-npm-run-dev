@@ -29,7 +29,17 @@
                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
                 Kelola Pesanan
             </a>
+            
+            <!-- Riwayat Pesanan -->
+            <a href="{{ route('riwayat-pesanan.index') }}" 
+               class="flex items-center px-4 py-2.5 rounded-lg font-medium transition-colors 
+                      {{ request()->routeIs('riwayat-pesanan.*') 
+                         ? 'text-gray-700 bg-brand-50 border-l-4 border-brand-600' 
+                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
+                Riwayat Pesanan
+            </a>
 
+            @if(Auth::user()->role === 'admin')
             <!-- Laporan Keuangan -->
             <a href="{{ route('laporan.index') }}" 
                class="flex items-center px-4 py-2.5 rounded-lg font-medium transition-colors 
@@ -46,6 +56,7 @@
                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
                 Manajemen Pengguna
             </a>
+            @endif
         </nav>
         
         <div class="mt-8 border-t border-gray-200 pt-4">

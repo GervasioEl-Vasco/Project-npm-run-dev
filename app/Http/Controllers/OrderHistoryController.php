@@ -12,7 +12,7 @@ class OrderHistoryController extends Controller
         $query = Pesanan::with(['layanan', 'pembayaran'])
             ->whereIn('status_pesanan', ['selesai', 'diambil', 'dibatalkan']);
 
-        if ($request->user()->role !== 'admin') {
+        if (!in_array($request->user()->role, ['admin', 'staff'])) {
             $query->where('user_id', $request->user()->id);
         }
 
@@ -23,7 +23,7 @@ class OrderHistoryController extends Controller
 
     public function show(Request $request, Pesanan $pesanan)
     {
-        if ($request->user()->role !== 'admin' && $pesanan->user_id !== $request->user()->id) {
+        if (!in_array($request->user()->role, ['admin', 'staff']) && $pesanan->user_id !== $request->user()->id) {
             abort(403, 'Anda tidak boleh melihat riwayat pesanan ini.');
         }
 

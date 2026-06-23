@@ -50,8 +50,23 @@ class PembayaranController extends Controller
     public function konfirmasi(Pembayaran $pembayaran)
     {
         $pembayaran->update(['status' => 'berhasil']);
-        $pembayaran->pesanan->update(['status_pembayaran' => 'sudah_bayar']);
+        
+        $pesanan = $pembayaran->pesanan;
+        $status_lama = $pesanan->status_pesanan;
+        
+        $pesanan->update([
+            'status_pembayaran' => 'sudah_bayar',
+            'status_pesanan' => 'diproses' // Otomatis ubah status ke diproses
+        ]);
 
-        return redirect()->route('pesanan.index')->with('success', 'Pembayaran berhasil dikonfirmasi.');
+        // Catat riwayat perubahan status
+        \App\Models\LogStatus::create([
+            'pesanan_id' => $pesanan->id,
+            'status_sebelumnya' => $status_lama,
+            'status_baru' => 'diproses',
+            'keterangan' => 'Status otomatis diubah ke diproses setelah pembayaran dikonfirmasi',
+        ]);
+
+        return redirect()->route('pesanan.index')->with('success', 'Pembayaran berhasil dikonfirmasi. Status pesanan otomatis menjadi Diproses.');
     }
 }
