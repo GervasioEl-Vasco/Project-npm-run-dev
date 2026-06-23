@@ -29,6 +29,9 @@ class OrderHistoryController extends Controller
 
         $pesanan->load(['user', 'layanan', 'pembayaran', 'pengecekan', 'logStatus']);
 
-        return view('history.show', compact('pesanan'));
+        if ($pesanan->pembayaran) {
+            return redirect()->route('pembayaran.show', $pesanan->pembayaran->id);
+            }
+            abort(404, 'Nota pembayaran belum tersedia.');
     }
 }
