@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 
     // Manajemen pengguna khusus admin
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
-        Route::resource('users', UserManagementController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
+        Route::resource('users', UserManagementController::class);
     });
 
     // Pesanan
