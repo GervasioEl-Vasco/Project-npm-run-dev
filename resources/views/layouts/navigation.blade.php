@@ -2,7 +2,6 @@
     $navigationItems = [
         ['label' => 'Dashboard', 'route' => 'dashboard', 'active' => 'dashboard'],
         ['label' => 'Pesanan', 'route' => 'pesanan.index', 'active' => 'pesanan.*'],
-        ['label' => 'Tracking', 'route' => 'tracking.index', 'active' => 'tracking.*'],
         ['label' => 'Riwayat', 'route' => 'riwayat-pesanan.index', 'active' => 'riwayat-pesanan.*'],
     ];
 @endphp
@@ -13,12 +12,8 @@
             <div class="flex">
                 <div class="flex shrink-0 items-center">
                     <a href="{{ route('dashboard') }}" class="flex items-center gap-3">
-                        <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-600 text-sm font-bold text-white">
-                            SL
-                        </span>
-                        <span class="hidden text-base font-bold text-slate-900 sm:block">Sistem Laundry</span>
                     </a>
-                </div>
+                </div>  
 
                 <div class="hidden gap-6 sm:-my-px sm:ms-10 sm:flex">
                     @foreach ($navigationItems as $item)

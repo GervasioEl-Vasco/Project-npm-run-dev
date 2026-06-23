@@ -60,7 +60,7 @@
                 Tanpa Harus Ribet!
             </h1>
             <p class="text-gray-600 text-lg leading-relaxed max-w-md">
-                Percayakan pakaian kotor Anda kepada PING! Laundry. Proses cepat, pengecekan detail pakaian, dengan harga ekonomis.
+                Percayakan pakaian kotor Anda kepada PING! Laundry. Proses cepat, hasil bersih, rapi, dan wangi dengan harga ekonomis.
             </p>
             <div class="flex items-center gap-4 pt-2">
                 <a href="{{ route('register') }}" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3.5 px-8 rounded-xl transition duration-200 shadow-xl shadow-pink-200 text-base">
@@ -77,27 +77,33 @@
             <!-- Big Pink Bubble -->
             <div class="absolute w-72 h-72 rounded-full bg-pink-400/20 blur-2xl animate-pulse"></div>
             <!-- Glassmorphism Card -->
-            <div class="relative bg-white/70 backdrop-blur-lg border border-pink-100 p-8 rounded-3xl shadow-2xl max-w-sm w-full space-y-6">
-                <div class="flex items-center justify-between">
-                    <span class="text-sm font-bold text-gray-500">Estimasi Cuci</span>
-                    <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full">Proses Express</span>
+            <div class="relative bg-white/70 backdrop-blur-lg border border-pink-100 p-8 rounded-3xl shadow-2xl max-w-sm w-full space-y-4">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Daftar Layanan</span>
+                    <span class="text-2xl">🧺</span>
                 </div>
+                
                 <div class="space-y-3">
-                    <div class="flex justify-between text-sm">
-                        <span>Layanan Cuci Setrika</span>
-                        <span class="font-bold text-gray-800">Rp 10.000 / Kg</span>
+                    <div class="flex justify-between items-center text-sm p-3 bg-white rounded-xl shadow-sm border border-pink-50 hover:-translate-y-0.5 transition duration-200">
+                        <span class="font-semibold text-gray-800">Cuci Kering Standar</span>
+                        <span class="font-bold text-pink-600">Rp 5.000 <span class="text-xs text-gray-400 font-normal">/ Kg</span></span>
                     </div>
-                    <div class="flex justify-between text-sm">
-                        <span>Pengecekan Fisik Saku</span>
-                        <span class="text-green-600 font-bold flex items-center gap-1">✓ Checked</span>
+                    
+                    <div class="flex justify-between items-center text-sm p-3 bg-white rounded-xl shadow-sm border border-pink-50 hover:-translate-y-0.5 transition duration-200">
+                        <span class="font-semibold text-gray-800">Cuci Setrika Reguler</span>
+                        <span class="font-bold text-pink-600">Rp 8.000 <span class="text-xs text-gray-400 font-normal">/ Kg</span></span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center text-sm p-3 bg-white rounded-xl shadow-sm border border-pink-50 hover:-translate-y-0.5 transition duration-200">
+                        <span class="font-semibold text-gray-800">Cuci Setrika Express (1 Hari)</span>
+                        <span class="font-bold text-pink-600">Rp 12.000 <span class="text-xs text-gray-400 font-normal">/ Kg</span></span>
                     </div>
                 </div>
-                <div class="border-t border-pink-50 pt-4 flex justify-between items-center">
-                    <div>
-                        <p class="text-xs text-gray-400">Total Pembayaran</p>
-                        <p class="text-2xl font-black text-pink-600">Rp 50.000</p>
-                    </div>
-                    <span class="text-3xl">🧺</span>
+                
+                <div class="pt-2">
+                    <a href="{{ route('register') }}" class="w-full block text-center bg-pink-50 hover:bg-pink-100 text-pink-600 font-bold py-2.5 rounded-xl transition duration-200 border border-pink-100">
+                        Buat Pesanan Pertama
+                    </a>
                 </div>
             </div>
         </div>
@@ -114,10 +120,10 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Card 1 -->
                 <div class="bg-gradient-to-b from-white to-pink-50/50 p-8 rounded-2xl border border-pink-100 hover:shadow-xl transition duration-300">
-                    <span class="text-4xl bg-pink-100 p-4 rounded-xl inline-block mb-6">🔍</span>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Proses Checking Detail</h3>
+                    <span class="text-4xl bg-pink-100 p-4 rounded-xl inline-block mb-6">🧼</span>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Cuci Bersih & Wangi</h3>
                     <p class="text-gray-600">
-                        Kami menjamin tidak ada barang berharga tertinggal di saku dan memisahkan pakaian luntur sebelum pencucian.
+                        Kami menggunakan deterjen berkualitas dan pelembut premium untuk memastikan pakaian Anda bersih maksimal dan wangi tahan lama.
                     </p>
                 </div>
                 <!-- Card 2 -->

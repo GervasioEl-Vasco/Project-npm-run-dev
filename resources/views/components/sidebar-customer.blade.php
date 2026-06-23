@@ -2,7 +2,6 @@
     $items = [
         ['label' => 'Beranda', 'route' => 'dashboard', 'active' => 'dashboard'],
         ['label' => 'Buat Pesanan Baru', 'route' => 'pesanan.create', 'active' => 'pesanan.create'],
-        ['label' => 'Lacak Cucian', 'route' => 'tracking.index', 'active' => 'tracking.*'],
         ['label' => 'Riwayat Transaksi', 'route' => 'riwayat-pesanan.index', 'active' => 'riwayat-pesanan.*'],
     ];
 @endphp
