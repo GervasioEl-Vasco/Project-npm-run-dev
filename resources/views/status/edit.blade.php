@@ -16,10 +16,10 @@
                     <p class="text-gray-600">Status Saat Ini: <span class="font-bold text-indigo-600 uppercase">{{ $pesanan->status_pesanan }}</span></p>
                 </div>
 
-                @if($pesanan->status_pesanan === 'selesai')
+                @if($pesanan->status_pesanan === 'diambil')
                     <div class="bg-green-50 border border-green-200 text-green-800 rounded-lg p-4 text-center">
                         <svg class="w-12 h-12 text-green-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <h4 class="font-bold text-lg">Pesanan Telah Selesai</h4>
+                        <h4 class="font-bold text-lg">Pesanan Telah Diambil</h4>
                         <p class="text-sm mt-1">Transaksi untuk pesanan ini sudah tutup buku dan tidak dapat diubah lagi.</p>
                         <div class="mt-4">
                             <a href="{{ route('pesanan.index') }}" class="text-indigo-600 font-semibold hover:underline">&larr; Kembali ke Daftar Pesanan</a>
@@ -36,15 +36,19 @@
                                 <option value="menunggu" {{ $pesanan->status_pesanan == 'menunggu' ? 'selected' : '' }}>Menunggu (Belum Dicuci)</option>
                                 <option value="diproses" {{ $pesanan->status_pesanan == 'diproses' ? 'selected' : '' }}>Diproses (Sedang Dicuci/Disetrika)</option>
                                 <option value="selesai" 
-                                    {{ $pesanan->status_pesanan == 'selesai' ? 'selected' : '' }}
+                                    {{ $pesanan->status_pesanan == 'selesai' ? 'selected' : '' }}>
+                                    Selesai (Sudah Dicuci & Siap Diambil)
+                                </option>
+                                <option value="diambil" 
+                                    {{ $pesanan->status_pesanan == 'diambil' ? 'selected' : '' }}
                                     {{ $pesanan->status_pembayaran !== 'sudah_bayar' ? 'disabled' : '' }}>
-                                    Selesai (Sudah Selesai & Diambil)
+                                    Diambil (Diserahkan ke Pelanggan)
                                 </option>
                                 <option value="dibatalkan" {{ $pesanan->status_pesanan == 'dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
                             </select>
                             @if($pesanan->status_pembayaran !== 'sudah_bayar')
                                 <p class="text-xs text-red-500 mt-2 font-semibold">
-                                    * Status "Selesai" dikunci. Pelanggan harus membayar dan mengirimkan bukti pembayaran terlebih dahulu.
+                                    * Status "Diambil" dikunci. Pelanggan harus melunasi pembayaran sebelum mengambil pakaian.
                                 </p>
                             @endif
                         </div>

@@ -47,9 +47,11 @@
                                 <td class="py-2 px-4 border-b text-sm">{{ $history->layanan->nama_layanan }} ({{ $history->berat_jumlah }} Kg)</td>
                                 <td class="py-2 px-4 border-b text-sm">Rp {{ number_format($history->total_harga, 0, ',', '.') }}</td>
                                 <td class="py-2 px-4 border-b text-sm">
-                                    <span class="px-2 py-1 text-xs font-bold uppercase rounded-full 
-                                        {{ $history->status_pesanan == 'selesai' ? 'bg-green-200 text-green-800' : 
-                                          ($history->status_pesanan == 'proses' || $history->status_pesanan == 'diproses' ? 'bg-blue-200 text-blue-800' : 'bg-yellow-200 text-yellow-800') }}">
+                                    <span class="px-2 py-1 rounded-full text-xs font-bold uppercase 
+                                        {{ $history->status_pesanan == 'diambil' ? 'bg-green-200 text-green-800' : 
+                                          ($history->status_pesanan == 'selesai' ? 'bg-teal-200 text-teal-800' : 
+                                            ($history->status_pesanan == 'proses' || $history->status_pesanan == 'diproses' ? 'bg-blue-200 text-blue-800' : 
+                                              ($history->status_pesanan == 'dibatalkan' ? 'bg-red-200 text-red-800' : 'bg-yellow-200 text-yellow-800'))) }}">
                                         {{ $history->status_pesanan }}
                                     </span>
                                 </td>

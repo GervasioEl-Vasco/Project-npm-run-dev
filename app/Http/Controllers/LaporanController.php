@@ -18,7 +18,7 @@ class LaporanController extends Controller
             ->get();
         $totalRevenue = $pesanan->where('status_pembayaran', 'sudah_bayar')->sum('total_harga');
         $totalOrders = $pesanan->count();
-        $completedOrders = $pesanan->where('status_pesanan', 'selesai')->count();
+        $completedOrders = $pesanan->whereIn('status_pesanan', ['selesai', 'diambil'])->count();
 
         // Menghitung omzet mingguan untuk chart
         $chartLabels = ['Minggu 1', 'Minggu 2', 'Minggu 3', 'Minggu 4', 'Minggu 5'];

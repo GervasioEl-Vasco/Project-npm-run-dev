@@ -38,7 +38,11 @@
                                 <td class="py-2 px-4 border-b text-sm">{{ $pesanan_item->berat_jumlah }} Kg</td>
                                 <td class="py-2 px-4 border-b text-sm">Rp {{ number_format($pesanan_item->total_harga, 0, ',', '.') }}</td>
                                 <td class="py-2 px-4 border-b text-sm">
-                                    <span class="px-2 py-1 bg-yellow-200 text-yellow-800 rounded-full text-xs font-bold uppercase">
+                                    <span class="px-2 py-1 rounded-full text-xs font-bold uppercase
+                                        {{ $pesanan_item->status_pesanan == 'diambil' ? 'bg-green-200 text-green-800' : 
+                                          ($pesanan_item->status_pesanan == 'selesai' ? 'bg-teal-200 text-teal-800' : 
+                                            ($pesanan_item->status_pesanan == 'diproses' ? 'bg-blue-200 text-blue-800' : 
+                                              ($pesanan_item->status_pesanan == 'dibatalkan' ? 'bg-red-200 text-red-800' : 'bg-yellow-200 text-yellow-800'))) }}">
                                         {{ $pesanan_item->status_pesanan }}
                                     </span>
                                 </td>

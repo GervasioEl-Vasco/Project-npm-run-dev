@@ -10,7 +10,7 @@ class OrderHistoryController extends Controller
     public function index(Request $request)
     {
         $query = Pesanan::with(['layanan', 'pembayaran'])
-            ->whereIn('status_pesanan', ['selesai', 'diambil', 'dibatalkan']);
+            ->whereIn('status_pesanan', ['diambil', 'dibatalkan']);
 
         if (!in_array($request->user()->role, ['admin', 'staff'])) {
             $query->where('user_id', $request->user()->id);

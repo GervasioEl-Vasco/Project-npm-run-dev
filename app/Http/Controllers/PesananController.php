@@ -15,6 +15,10 @@ class PesananController extends Controller
         if ($request->user()->role !== 'admin' && $request->user()->role !== 'staff') {
             $query->where('user_id', $request->user()->id);
         }
+
+        // Sembunyikan pesanan yang sudah tutup buku dari daftar antrean aktif
+        $query->whereNotIn('status_pesanan', ['diambil', 'dibatalkan']);
+
         $pesanan = $query->latest()->get();
         return view('pesanan.index', compact('pesanan'));
     }
