@@ -14,19 +14,46 @@
     </div>
     <div class="flex flex-col justify-between flex-1 mt-6">
         <nav class="space-y-2">
-            @foreach ($items as $item)
-                @php
-                    $href = Route::has($item['route']) ? route($item['route']) : '#';
-                    $isActive = request()->routeIs($item['active']);
-                @endphp
-                <a href="{{ $href }}" 
-                   class="flex items-center px-4 py-2.5 rounded-lg font-medium transition-colors 
-                          {{ $isActive 
-                             ? 'text-gray-700 bg-brand-50 border-l-4 border-brand-600' 
-                             : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
-                    {{ $item['label'] }}
-                </a>
-            @endforeach
+            <!-- Dashboard -->
+            <a href="{{ route('dashboard') }}" 
+               class="flex items-center px-4 py-2.5 rounded-lg font-medium transition-colors 
+                      {{ request()->routeIs('dashboard') 
+                         ? 'text-gray-700 bg-brand-50 border-l-4 border-brand-600' 
+                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
+                Dashboard
+            </a>
+            <!-- Kelola Pesanan -->
+            <a href="{{ route('pesanan.index') }}" 
+               class="flex items-center px-4 py-2.5 rounded-lg font-medium transition-colors 
+                      {{ request()->routeIs('pesanan.*') 
+                         ? 'text-gray-700 bg-brand-50 border-l-4 border-brand-600' 
+                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
+                Kelola Pesanan
+            </a>
+            <!-- Checking & Status -->
+            <a href="{{ route('pengecekan.index') }}" 
+               class="flex items-center px-4 py-2.5 rounded-lg font-medium transition-colors 
+                      {{ request()->routeIs('pengecekan.*') 
+                         ? 'text-gray-700 bg-brand-50 border-l-4 border-brand-600' 
+                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
+                Checking & Status
+            </a>
+            <!-- Laporan Keuangan -->
+            <a href="{{ route('laporan.index') }}" 
+               class="flex items-center px-4 py-2.5 rounded-lg font-medium transition-colors 
+                      {{ request()->routeIs('laporan.*') 
+                         ? 'text-gray-700 bg-brand-50 border-l-4 border-brand-600' 
+                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
+                Laporan Keuangan
+            </a>
+            <!-- Manajemen Pengguna -->
+            <a href="{{ Route::has('admin.users.index') ? route('admin.users.index') : '#' }}" 
+               class="flex items-center px-4 py-2.5 rounded-lg font-medium transition-colors 
+                      {{ request()->routeIs('admin.users.*') 
+                         ? 'text-gray-700 bg-brand-50 border-l-4 border-brand-600' 
+                         : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100' }}">
+                Manajemen Pengguna
+            </a>
         </nav>
         
         <div class="mt-8 border-t border-gray-200 pt-4">
