@@ -52,7 +52,7 @@
     <header class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div class="space-y-6">
             <span class="bg-pink-100 text-pink-700 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full inline-block">
-                ✨ Solusi Cuci Pakaian Terbaik Anda
+                Solusi Cuci Pakaian Terbaik Anda
             </span>
             <h1 class="text-5xl lg:text-6xl font-black text-gray-900 leading-tight">
                 Cucian <span class="text-pink-600 underline decoration-pink-300">Bersih</span>, <br>
@@ -67,7 +67,7 @@
                     Mulai Laundry Sekarang
                 </a>
                 <a href="#layanan" class="text-pink-600 hover:text-pink-700 font-bold flex items-center gap-1.5 transition">
-                    Lihat Layanan Kami <span class="text-lg">→</span>
+                    Kelebihan Kami
                 </a>
             </div>
         </div>
@@ -77,24 +77,42 @@
             <!-- Big Pink Bubble -->
             <div class="absolute w-72 h-72 rounded-full bg-pink-400/20 blur-2xl animate-pulse"></div>
             <!-- Glassmorphism Card -->
-            <div class="relative bg-white/70 backdrop-blur-lg border border-pink-100 p-8 rounded-3xl shadow-2xl max-w-sm w-full space-y-6">
-                <div class="flex items-center justify-between">
-                    <span class="text-sm font-bold text-gray-500">Estimasi Cuci</span>
-                    <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full">Proses Express</span>
+            <div class="relative bg-white/80 backdrop-blur-lg border border-pink-100 p-8 rounded-3xl shadow-2xl max-w-sm w-full space-y-6">
+                <div class="flex items-center justify-between pb-3 border-b border-pink-50">
+                    <span class="text-sm font-black text-pink-600 uppercase tracking-wider">Daftar Layanan</span>
+                    <span class="bg-pink-100 text-pink-700 text-xs font-bold px-3 py-1 rounded-full">Harga Terbaik</span>
                 </div>
-                <div class="space-y-3">
-                    <div class="flex justify-between text-sm">
-                        <span>Layanan Cuci Setrika</span>
-                        <span class="font-bold text-gray-800">Rp 10.000 / Kg</span>
+    
+                <div class="space-y-4">
+                    <!-- Cuci Kering -->
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2.5">
+                            <span class="text-sm font-bold text-gray-700">Cuci Kering</span>
+                        </div>
+                        <span class="font-extrabold text-gray-900 text-sm">Rp 7.000/Kg</span>
                     </div>
-                    <div class="flex justify-between text-sm"
+                    <!-- Cuci Setrika -->
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2.5">
+                            <span class="text-sm font-bold text-gray-700">Cuci Setrika</span>
+                        </div>
+                        <span class="font-extrabold text-gray-900 text-sm">Rp 10.000/Kg</span>
+                    </div>
+                    <!-- Setrika Saja -->
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2.5">
+                            <span class="text-sm font-bold text-gray-700">Setrika Saja</span>
+                        </div>
+                        <span class="font-extrabold text-gray-900 text-sm">Rp 5.000/Kg</span>
+                    </div>
                 </div>
-                <div class="border-t border-pink-50 pt-4 flex justify-between items-center">
-                    <div>
-                        <p class="text-xs text-gray-400">Total Pembayaran</p>
-                        <p class="text-2xl font-black text-pink-600">Rp 50.000</p>
+                    <div class="border-t border-pink-50 pt-4 flex justify-between items-center">
+                        <div>
+                            <p class="text-xs text-gray-400">Proses Cepat & Bersih</p>
+                            <p class="text-sm font-extrabold text-gray-800">PING! Laundry Express</p>
+                        </div>
+                        <span class="text-2xl">🫧</span>
                     </div>
-                    <span class="text-3xl">🧺</span>
                 </div>
             </div>
         </div>
