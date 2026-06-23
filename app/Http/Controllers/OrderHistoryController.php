@@ -18,7 +18,7 @@ class OrderHistoryController extends Controller
 
         $riwayat = $query->latest()->get();
 
-        return view('history.index', compact('riwayat'));
+        return view('history.index', ['histories' => $riwayat]);
     }
 
     public function show(Request $request, Pesanan $pesanan)
