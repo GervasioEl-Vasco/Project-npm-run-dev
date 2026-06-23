@@ -10,30 +10,30 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                 
                 <div class="mb-6 pb-4 border-b border-gray-200">
-                    <h3 class="text-lg font-bold">Detail Pesanan #ORD-{{ $order->id }}</h3>
-                    <p class="text-gray-600">Pelanggan: {{ $order->user->name }}</p>
-                    <p class="text-gray-600">Layanan: {{ $order->service->name }} ({{ $order->weight }} Kg)</p>
+                    <h3 class="text-lg font-bold">Detail Pesanan #ORD-{{ $pesanan->id }}</h3>
+                    <p class="text-gray-600">Pelanggan: {{ $pesanan->user->name }}</p>
+                    <p class="text-gray-600">Layanan: {{ $pesanan->layanan->nama_layanan }} ({{ $pesanan->berat_jumlah }} Kg)</p>
                 </div>
 
-                <form action="{{ route('payments.store') }}" method="POST"
+                <form action="{{ route('pembayaran.store', $pesanan->id) }}" method="POST"
                       x-data="{ 
-                          totalTagihan: {{ $order->total_price }},
+                          totalTagihan: {{ $pesanan->total_harga }},
                           jumlahBayar: 0,
                           get kembalian() { return this.jumlahBayar - this.totalTagihan }
                       }">
                     @csrf
-                    <input type="hidden" name="order_id" value="{{ $order->id }}">
+                    <input type="hidden" name="pesanan_id" value="{{ $pesanan->id }}">
 
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700">Total Tagihan</label>
                         <div class="mt-1 text-2xl font-bold text-red-600">
-                            Rp {{ number_format($order->total_price, 0, ',', '.') }}
+                            Rp {{ number_format($pesanan->total_harga, 0, ',', '.') }}
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <label for="amount" class="block text-sm font-medium text-gray-700">Uang Diterima (Rp)</label>
-                        <input type="number" name="amount" id="amount" required min="{{ $order->total_price }}"
+                        <input type="number" name="amount" id="amount" required min="{{ $pesanan->total_harga }}"
                                x-model.number="jumlahBayar"
                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg font-bold">
                     </div>
@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="flex items-center justify-end">
-                        <a href="{{ route('orders.index') }}" class="text-gray-500 mr-4 hover:underline">Batal</a>
+                        <a href="{{ route('pesanan.index') }}" class="text-gray-500 mr-4 hover:underline">Batal</a>
                         <button type="submit" x-bind:disabled="kembalian < 0" 
                                 class="bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded">
                             Konfirmasi Pembayaran

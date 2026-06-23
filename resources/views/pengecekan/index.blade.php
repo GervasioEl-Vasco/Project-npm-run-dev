@@ -18,10 +18,10 @@
                  }">
                 
                 <h3 class="text-xl font-bold text-gray-800 mb-6 pb-2 border-b">
-                    Form Pengecekan Fisik: #ORD-{{ $order->id }}
+                    Form Pengecekan Fisik: #ORD-{{ $pesanan->id }}
                 </h3>
 
-                <form action="{{ route('checking.store', $order->id) }}" method="POST">
+                <form action="{{ route('pengecekan.store', $pesanan->id) }}" method="POST">
                     @csrf
 
                     <!-- Checklist Box -->
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="flex justify-between items-center border-t pt-4">
-                        <a href="{{ route('orders.index') }}" class="text-gray-500 hover:underline">Kembali</a>
+                        <a href="{{ route('pesanan.index') }}" class="text-gray-500 hover:underline">Kembali</a>
                         <button type="submit" :disabled="!canSubmit" 
                                 class="bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold py-2.5 px-6 rounded-xl transition duration-200 shadow-md">
                             Konfirmasi & Lanjutkan Cucian
