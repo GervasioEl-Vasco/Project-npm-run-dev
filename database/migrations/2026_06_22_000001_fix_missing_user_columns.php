@@ -29,14 +29,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $kolom = ['phone', 'address', 'role', 'is_active'];
-
-            foreach ($kolom as $namaKolom) {
-                if (Schema::hasColumn('users', $namaKolom)) {
-                    $table->dropColumn($namaKolom);
-                }
-            }
-        });
+        // Migrasi ini hanya patch untuk database lama.
+        // Kolom-kolomnya juga sudah ada di migration utama users, jadi rollback tidak perlu menghapus apa pun.
     }
 };
