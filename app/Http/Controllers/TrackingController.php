@@ -17,7 +17,7 @@ class TrackingController extends Controller
 
         $pesanan = $query->latest()->get();
 
-        return view('tracking.index', compact('pesanan'));
+        return view('pesanan.index', compact('pesanan'));
     }
 
     public function show(Request $request, Pesanan $pesanan)
