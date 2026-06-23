@@ -36,3 +36,6 @@ class PembayaranController extends Controller
     public function show(Pembayaran $pembayaran)
     {
         $pembayaran->load(['pesanan.user', 'pesanan.layanan']);
+        return view('pembayaran.show', compact('pembayaran'));
+    }
+}
