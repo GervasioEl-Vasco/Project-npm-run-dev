@@ -2,8 +2,8 @@
     $items = [
         ['label' => 'Beranda', 'route' => 'dashboard', 'active' => 'dashboard'],
         ['label' => 'Buat Pesanan Baru', 'route' => 'pesanan.create', 'active' => 'pesanan.create'],
-        ['label' => 'Lacak Cucian', 'route' => 'pesanan.index', 'active' => 'tracking.*'],
-        ['label' => 'Riwayat Transaksi', 'route' => 'history.index', 'active' => 'history.*'],
+        ['label' => 'Lacak Cucian', 'route' => 'tracking.index', 'active' => 'tracking.*'],
+        ['label' => 'Riwayat Transaksi', 'route' => 'riwayat-pesanan.index', 'active' => 'riwayat-pesanan.*'],
     ];
 @endphp
 <aside class="flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white border-r border-gray-200 shadow-sm z-10">
