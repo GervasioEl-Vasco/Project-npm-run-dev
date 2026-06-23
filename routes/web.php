@@ -29,8 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('layanan', LayananController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
 
     // Manajemen pengguna khusus admin
-    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
-        Route::resource('users', UserManagementController::class)->only(['index', 'store', 'show', 'update', 'destroy']);
+    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function() {
+        Route::resource('users', UserManagementController::class);
     });
 
     // Pesanan

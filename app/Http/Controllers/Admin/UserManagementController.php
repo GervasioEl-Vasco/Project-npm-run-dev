@@ -14,10 +14,12 @@ class UserManagementController extends Controller
     {
         $users = User::orderBy('name')->get();
 
-        return response()->json([
-            'message' => 'Data pengguna berhasil diambil.',
-            'data' => $users,
-        ]);
+        return view('admin.users.index', compact('users'));
+    }
+
+    public function create()
+    {
+        return view('admin.users.create');
     }
 
     public function store(Request $request)
@@ -37,18 +39,17 @@ class UserManagementController extends Controller
 
         $user = User::create($data);
 
-        return response()->json([
-            'message' => 'Pengguna berhasil ditambahkan.',
-            'data' => $user,
-        ], 201);
+        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil ditambahkan.');
     }
 
     public function show(User $user)
     {
-        return response()->json([
-            'message' => 'Detail pengguna berhasil diambil.',
-            'data' => $user,
-        ]);
+        return view('admin.users.show', compact('user'));
+    }
+
+    public function edit(User $user)
+    {
+        return view('admin.users.edit', compact('user'));
     }
 
     public function update(Request $request, User $user)
@@ -75,24 +76,17 @@ class UserManagementController extends Controller
 
         $user->update($data);
 
-        return response()->json([
-            'message' => 'Pengguna berhasil diperbarui.',
-            'data' => $user,
-        ]);
+        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil diperbarui.');
     }
 
     public function destroy(User $user)
     {
         if (auth()->id() === $user->id) {
-            return response()->json([
-                'message' => 'Admin tidak boleh menghapus akun sendiri.',
-            ], 422);
+            return back()->with('error', 'Admin tidak boleh menghapus akun sendiri.');
         }
 
         $user->delete();
 
-        return response()->json([
-            'message' => 'Pengguna berhasil dihapus.',
-        ]);
+        return redirect()->route('admin.users.index')->with('success', 'Pengguna berhasil dihapus.');
     }
 }

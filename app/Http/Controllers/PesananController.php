@@ -1,47 +1,41 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Pesanan;
 use App\Models\Layanan;
 use App\Models\LogStatus;
+use App\Models\User;
 use App\Services\CostCalculationService;
 use Illuminate\Http\Request;
-
 class PesananController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $pesanan = Pesanan::with(['user', 'layanan'])->get();
-
-        return response()->json([
-            'message' => 'Data pesanan berhasil diambil.',
-            'data' => $pesanan,
-        ]);
+        $query = Pesanan::with(['user', 'layanan']);
+        // Jika bukan admin/staff, batasi hanya melihat pesanan milik sendiri
+        if ($request->user()->role !== 'admin' && $request->user()->role !== 'staff') {
+            $query->where('user_id', $request->user()->id);
+        }
+        $pesanan = $query->latest()->get();
+        return view('pesanan.index', compact('pesanan'));
     }
-
     public function create()
     {
         $layanan = Layanan::where('status_tersedia', true)->get();
-
-        return response()->json([
-            'message' => 'Data layanan tersedia untuk membuat pesanan berhasil diambil.',
-            'data' => $layanan,
-        ]);
+        $users = User::where('role', 'customer')->get();
+        return view('pesanan.create', compact('layanan', 'users'));
     }
-
     public function store(Request $request, CostCalculationService $costCalculationService)
     {
         $request->validate([
+            'user_id' => 'required|exists:users,id',
             'layanan_id' => 'required|exists:layanan,id',
-            'berat_jumlah' => 'required|integer|min:1',
+            'berat_jumlah' => 'required|numeric|min:0.1',
+            'catatan' => 'nullable|string',
         ]);
-
         $layanan = Layanan::findOrFail($request->layanan_id);
-        $total_harga = $costCalculationService->hitungTotal($layanan, (int) $request->berat_jumlah);
-
+        $total_harga = $costCalculationService->hitungTotal($layanan, (float) $request->berat_jumlah);
         $pesanan = Pesanan::create([
-            'user_id' => auth()->id() ?? 1, // fallback untuk testing
+            'user_id' => $request->user_id,
             'layanan_id' => $layanan->id,
             'berat_jumlah' => $request->berat_jumlah,
             'total_harga' => $total_harga,
@@ -49,27 +43,12 @@ class PesananController extends Controller
             'status_pembayaran' => 'belum_bayar',
             'catatan' => $request->catatan,
         ]);
-
         LogStatus::create([
             'pesanan_id' => $pesanan->id,
             'status_sebelumnya' => null,
             'status_baru' => 'menunggu',
             'keterangan' => 'Pesanan baru dibuat',
         ]);
-
-        return response()->json([
-            'message' => 'Pesanan berhasil dibuat.',
-            'data' => $pesanan->load(['user', 'layanan']),
-        ], 201);
-    }
-
-    public function show(Pesanan $pesanan)
-    {
-        $pesanan->load(['user', 'layanan', 'logStatus', 'pembayaran', 'pengecekan']);
-
-        return response()->json([
-            'message' => 'Detail pesanan berhasil diambil.',
-            'data' => $pesanan,
-        ]);
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dibuat.');
     }
 }

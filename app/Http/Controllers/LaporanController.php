@@ -16,7 +16,6 @@ class LaporanController extends Controller
             ->whereYear('created_at', $tahun)
             ->with(['layanan', 'user'])
             ->get();
-
         $totalRevenue = $pesanan->where('status_pembayaran', 'sudah_bayar')->sum('total_harga');
         $totalOrders = $pesanan->count();
         $completedOrders = $pesanan->where('status_pesanan', 'selesai')->count();

@@ -18,10 +18,7 @@ class OrderHistoryController extends Controller
 
         $riwayat = $query->latest()->get();
 
-        return response()->json([
-            'message' => 'Riwayat pesanan berhasil diambil.',
-            'data' => $riwayat,
-        ]);
+        return view('history.index', compact('riwayat'));
     }
 
     public function show(Request $request, Pesanan $pesanan)
@@ -32,9 +29,6 @@ class OrderHistoryController extends Controller
 
         $pesanan->load(['user', 'layanan', 'pembayaran', 'pengecekan', 'logStatus']);
 
-        return response()->json([
-            'message' => 'Detail riwayat pesanan berhasil diambil.',
-            'data' => $pesanan,
-        ]);
+        return view('history.show', compact('pesanan'));
     }
 }

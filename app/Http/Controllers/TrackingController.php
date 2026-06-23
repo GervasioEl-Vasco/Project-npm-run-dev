@@ -17,10 +17,7 @@ class TrackingController extends Controller
 
         $pesanan = $query->latest()->get();
 
-        return response()->json([
-            'message' => 'Data tracking pesanan berhasil diambil.',
-            'data' => $pesanan,
-        ]);
+        return view('tracking.index', compact('pesanan'));
     }
 
     public function show(Request $request, Pesanan $pesanan)
@@ -31,9 +28,6 @@ class TrackingController extends Controller
 
         $pesanan->load(['user', 'layanan', 'logStatus' => fn ($query) => $query->oldest()]);
 
-        return response()->json([
-            'message' => 'Riwayat status pesanan berhasil diambil.',
-            'data' => $pesanan,
-        ]);
+        return view('tracking.show', compact('pesanan'));
     }
 }
