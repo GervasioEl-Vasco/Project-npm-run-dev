@@ -19,14 +19,6 @@ class LaporanController extends Controller
 
         $total_pendapatan = $pesanan->where('status_pembayaran', 'sudah_bayar')->sum('total_harga');
 
-        return response()->json([
-            'message' => 'Laporan pesanan berhasil diambil.',
-            'filter' => [
-                'bulan' => $bulan,
-                'tahun' => $tahun,
-            ],
-            'total_pendapatan' => $total_pendapatan,
-            'data' => $pesanan,
-        ]);
+        return view('laporan.index', compact('pesanan', 'total_pendapatan', 'bulan', 'tahun'));
     }
 }
