@@ -52,7 +52,7 @@
                         </a>
 
                         <!-- Pengecekan Barang -->
-                        <a href="{{ route('pesanan.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
+                        <a href="{{ route('pengecekan.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
                             <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">🔍</span>
                             <div>
                                 <h5 class="font-bold text-gray-800 text-lg">Pengecekan Fisik</h5>
@@ -101,7 +101,7 @@
                         </a>
 
                         <!-- Lacak Status Pakaian -->
-                        <a href="{{ route('pesanan.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
+                        <a href="{{ route('tracking.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
                             <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">🔍</span>
                             <div>
                                 <h5 class="font-bold text-gray-800 text-lg">Lacak Cucian</h5>
@@ -110,7 +110,7 @@
                         </a>
 
                         <!-- Riwayat Pesanan -->
-                        <a href="{{ route('history.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
+                        <a href="{{ route('riwayat-pesanan.index') }}" class="bg-white p-6 rounded-2xl border border-pink-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition duration-200 flex flex-col justify-between h-40">
                             <span class="text-3xl bg-pink-50 p-2 rounded-xl w-fit">📜</span>
                             <div>
                                 <h5 class="font-bold text-gray-800 text-lg">Riwayat Pesanan</h5>
