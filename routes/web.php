@@ -48,10 +48,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/riwayat-pesanan', [OrderHistoryController::class, 'index'])->name('riwayat-pesanan.index');
     Route::get('/riwayat-pesanan/{pesanan}', [OrderHistoryController::class, 'show'])->name('riwayat-pesanan.show');
 
-    // Pembayaran
+// Pembayaran
     Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::get('/pesanan/{pesanan}/pembayaran/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
     Route::post('/pesanan/{pesanan}/pembayaran', [PembayaranController::class, 'store'])->name('pembayaran.store');
+    Route::get('/pembayaran/{pembayaran}', [PembayaranController::class, 'show'])->name('pembayaran.show'); 
     Route::patch('/pembayaran/{pembayaran}/konfirmasi', [PembayaranController::class, 'konfirmasi'])->name('pembayaran.konfirmasi');
+
 
     // Laporan
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
