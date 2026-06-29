@@ -5,41 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PING! Laundry - Bersih, Wangi & Cepat</title>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS (via Vite) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
         body {
             font-family: 'Outfit', sans-serif;
+            /* Warna cadangan jika gambar background gagal dimuat */
+            background-color: #c4aeb9; 
         }
     </style>
 </head>
-<body class="antialiased bg-gradient-to-tr from-pink-50 via-white to-pink-100 min-h-screen text-gray-800">
+<body class="text-[#1b1b18] min-h-screen flex flex-col" 
+      style="background-image: url('{{ asset('images/bg-landing.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
-    <!-- Navbar -->
-    <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center bg-white/60 backdrop-blur-md sticky top-0 z-50 border-b border-pink-100">
-        <div class="flex items-center gap-2">
-            <span class="text-2xl">🫧</span>
-            <span class="text-2xl font-black tracking-wider text-pink-600">PING!<span class="text-gray-800 font-medium">Laundry</span></span>
+    <nav class="max-w-7xl mx-auto px-6 py-6 w-full flex justify-between items-center relative z-50">
+
+        <!-- Spacer sebelah kiri agar logo seimbang tepat di tengah -->
+        <div class="hidden md:flex flex-1"></div>
+
+        <!-- Logo PING! Laundry di tengah dan diperbesar -->
+        <div class="flex-1 flex justify-start md:justify-center items-center">
+            <a href="{{ url('/') }}">
+                <img src="{{ asset('images/logo.png') }}" alt="PING! Laundry Logo" class="h-28 lg:h-32 w-auto object-contain drop-shadow-md">
+            </a>
         </div>
         
-        <div>
+        <div class="flex-1 flex justify-end">
             @if (Route::has('login'))
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4 lg:gap-8">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2.5 px-6 rounded-xl transition duration-200 shadow-lg shadow-pink-200">
+                        <a href="{{ url('/dashboard') }}" class="bg-[#d94f87] hover:bg-pink-700 text-white font-bold py-2.5 px-8 rounded-xl transition duration-200 shadow-md">
                             Dashboard
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="text-gray-600 hover:text-pink-600 font-bold transition">Masuk</a>
+                        <a href="{{ route('login') }}" class="text-gray-900 hover:text-[#d94f87] font-bold text-lg transition">Masuk</a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2.5 px-6 rounded-xl transition duration-200 shadow-lg shadow-pink-200">
-                                Daftar Baru
+                            <a href="{{ route('register') }}" class="bg-[#d94f87] hover:bg-pink-700 text-white font-bold py-2.5 px-8 rounded-xl transition duration-200 shadow-md">
+                                Daftar
                             </a>
                         @endif
                     @endauth
@@ -48,119 +54,118 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div class="space-y-6">
-            <span class="bg-pink-100 text-pink-700 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full inline-block">
-                Solusi Cuci Pakaian Terbaik Anda
-            </span>
-            <h1 class="text-5xl lg:text-6xl font-black text-gray-900 leading-tight">
-                Cucian <span class="text-pink-600 underline decoration-pink-300">Bersih</span>, <br>
-                Wangi & Rapi <br>
-                Tanpa Harus Ribet!
-            </h1>
-            <p class="text-gray-600 text-lg leading-relaxed max-w-md">
-                Percayakan pakaian kotor Anda kepada PING! Laundry. Proses cepat, pengecekan detail pakaian, dengan harga ekonomis.
-            </p>
-            <div class="flex items-center gap-4 pt-2">
-                <a href="{{ route('register') }}" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3.5 px-8 rounded-xl transition duration-200 shadow-xl shadow-pink-200 text-base">
-                    Mulai Laundry Sekarang
-                </a>
-                <a href="#layanan" class="text-pink-600 hover:text-pink-700 font-bold flex items-center gap-1.5 transition">
-                    Kelebihan Kami
-                </a>
+    <main class="flex-1 flex flex-col justify-center max-w-7xl mx-auto px-6 w-full pt-12 pb-24 space-y-24">
+        
+        <section id="harga" class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span class="bg-[#e49bb7] text-white text-sm font-bold uppercase tracking-wider px-5 py-1.5 rounded-full inline-block">
+                    Solusi Cuci Pakaian Anda
+                </span>
+                <h1 class="text-5xl lg:text-6xl font-black text-gray-900 leading-[1.1] uppercase">
+                    Cucian <span class="text-[#d94f87] underline decoration-[#d94f87]/40">Bersih</span><br>
+                    Wangi Dan Rapi<br>
+                    Tanpa Harus Ribet
+                </h1>
+                <p class="text-gray-700 text-lg leading-relaxed max-w-md">
+                    Percayakan pakaian kotor Anda kepada PING! Laundry. Proses cepat, pengecekan detail pakaian, dengan harga ekonomis.
+                </p>
+                <div class="flex items-center gap-4 pt-2">
+                    <a href="{{ route('register') }}" class="bg-[#d94f87] hover:bg-pink-700 text-white font-bold py-3.5 px-6 rounded-lg transition duration-200 shadow-lg text-sm">
+                        Mulai Laundry Sekarang
+                    </a>
+                    <a href="#layanan" class="text-gray-900 hover:text-[#d94f87] font-extrabold flex items-center gap-1.5 transition text-sm">
+                        Kelebihan kami ---->
+                    </a>
+                </div>
             </div>
-        </div>
 
-        <!-- Hero Graphic (Bubbles CSS) -->
-        <div class="relative flex justify-center items-center h-[400px]">
-            <!-- Big Pink Bubble -->
-            <div class="absolute w-72 h-72 rounded-full bg-pink-400/20 blur-2xl animate-pulse"></div>
-            <!-- Glassmorphism Card -->
-            <div class="relative bg-white/80 backdrop-blur-lg border border-pink-100 p-8 rounded-3xl shadow-2xl max-w-sm w-full space-y-6">
-                <div class="flex items-center justify-between pb-3 border-b border-pink-50">
-                    <span class="text-sm font-black text-pink-600 uppercase tracking-wider">Daftar Layanan</span>
-                    <span class="bg-pink-100 text-pink-700 text-xs font-bold px-3 py-1 rounded-full">Harga Terbaik</span>
-                </div>
-    
-                <div class="space-y-4">
-                    <!-- Cuci Kering -->
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-2.5">
-                            <span class="text-sm font-bold text-gray-700">Cuci Kering</span>
-                        </div>
-                        <span class="font-extrabold text-gray-900 text-sm">Rp 7.000/Kg</span>
+            <div class="flex justify-center lg:justify-end">
+                <div class="bg-white p-8 rounded-[2rem] shadow-xl max-w-sm w-full space-y-6">
+                    <div class="flex items-center justify-between pb-2">
+                        <span class="text-sm font-black text-gray-900 tracking-wide">Daftar Layanan</span>
+                        <span class="bg-[#e49bb7] text-white text-xs font-bold px-3 py-1 rounded-full">Harga Terbaik</span>
                     </div>
-                    <!-- Cuci Setrika -->
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-2.5">
-                            <span class="text-sm font-bold text-gray-700">Cuci Setrika</span>
+        
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-gray-800">Cuci Kering</span>
+                            <span class="font-black text-gray-900 text-xs">Rp7.000/Kg</span>
                         </div>
-                        <span class="font-extrabold text-gray-900 text-sm">Rp 10.000/Kg</span>
-                    </div>
-                    <!-- Setrika Saja -->
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-2.5">
-                            <span class="text-sm font-bold text-gray-700">Setrika Saja</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-gray-800">Cuci Setrika</span>
+                            <span class="font-black text-gray-900 text-xs">Rp10.000/Kg</span>
                         </div>
-                        <span class="font-extrabold text-gray-900 text-sm">Rp 5.000/Kg</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-gray-800">Setrika aja</span>
+                            <span class="font-black text-gray-900 text-xs">Rp5.000/Kg</span>
+                        </div>
                     </div>
-                </div>
-                    <div class="border-t border-pink-50 pt-4 flex justify-between items-center">
+                    
+                    <div class="pt-6 flex justify-between items-end">
                         <div>
-                            <p class="text-xs text-gray-400">Proses Cepat & Bersih</p>
-                            <p class="text-sm font-extrabold text-gray-800">PING! Laundry Express</p>
+                            <p class="text-[10px] text-gray-500 font-medium">Proses Cepat & Bersih</p>
+                            <p class="text-xs font-black text-gray-900">PING! Laundry Express</p>
                         </div>
-                        <span class="text-2xl">🫧</span>
+                        <span class="font-black text-gray-900 text-xs">Rp50.000/Kg</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </section>
 
-    <!-- Kelebihan Section -->
-    <section class="bg-white/80 py-20 border-t border-pink-50" id="layanan">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-xl mx-auto mb-16 space-y-3">
-                <span class="text-pink-600 text-sm font-extrabold uppercase tracking-widest">Kenapa Harus PING! Laundry?</span>
-                <h2 class="text-4xl font-black text-gray-900">Kami Menjaga Pakaian Anda Seperti Milik Sendiri</h2>
+        <section id="layanan" class="space-y-12">
+            <div class="text-center max-w-2xl mx-auto">
+                <h2 class="text-4xl lg:text-5xl font-black text-black leading-tight">
+                    Kami Menjaga Pakaian Anda<br>Seperti Milik Sendiri
+                </h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-gradient-to-b from-white to-pink-50/50 p-8 rounded-2xl border border-pink-100 hover:shadow-xl transition duration-300">
-                    <span class="text-4xl bg-pink-100 p-4 rounded-xl inline-block mb-6">🔍</span>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Proses Checking Detail</h3>
-                    <p class="text-gray-600">
-                        Kami menjamin tidak ada barang berharga tertinggal di saku dan memisahkan pakaian luntur sebelum pencucian.
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="w-14 h-14 bg-[#e8a3c0] rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-[#ba2b65]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-2">Proses Cheking Detail</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Kami menjamin tidak ada barang berharga tertinggal di asaku dan memisahkan pakaian luntur sebelum pencucian.
                     </p>
                 </div>
-                <!-- Card 2 -->
-                <div class="bg-gradient-to-b from-white to-pink-50/50 p-8 rounded-2xl border border-pink-100 hover:shadow-xl transition duration-300">
-                    <span class="text-4xl bg-pink-100 p-4 rounded-xl inline-block mb-6">⚡</span>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Proses Cepat & Tepat Waktu</h3>
-                    <p class="text-gray-600">
-                        Pilihan layanan express kilat siap membantu saat kondisi darurat. Pakaian kembali bersih tepat waktu.
+
+                <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="w-14 h-14 bg-[#e8a3c0] rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-[#ba2b65]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-2">Proses Cepat & Tepat Waktu</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Pilihan layanan express kilat siap membantu saat kondisi darurat. Kembali bersih tepat waktu.
                     </p>
                 </div>
-                <!-- Card 3 -->
-                <div class="bg-gradient-to-b from-white to-pink-50/50 p-8 rounded-2xl border border-pink-100 hover:shadow-xl transition duration-300">
-                    <span class="text-4xl bg-pink-100 p-4 rounded-xl inline-block mb-6">💵</span>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Metode Pembayaran Mudah</h3>
-                    <p class="text-gray-600">
-                        Mendukung pembayaran langsung tunai di kasir maupun upload bukti transfer bank secara digital.
+
+                <div class="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition duration-300">
+                    <div class="w-14 h-14 bg-[#e8a3c0] rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-[#ba2b65]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-gray-900 mb-2">Metode Pembayaran</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Mendukung pembayaran langsung tunai di kasir maupun upload bukti bank secara digital.
                     </p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="items-center gap-2">
+            <div class="flex items-center gap-2">
                 <span class="text-xl font-black tracking-wider text-pink-500">PING!<span class="text-white font-medium">Laundry</span></span>
             </div>
+            <p class="text-sm">&copy; {{ date('Y') }} PING! Laundry. All rights reserved.</p>
         </div>
     </footer>
 

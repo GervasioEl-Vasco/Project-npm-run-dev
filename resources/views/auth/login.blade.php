@@ -1,77 +1,72 @@
 <x-guest-layout>
-    <div class="mb-8 text-center">
-        <!-- Logo / Brand Header -->
-        <div class="flex justify-center items-center gap-2 mb-2">
-            <span class="text-3xl">🫧</span>
-            <span class="text-2xl font-black tracking-wider text-pink-600">PING!<span class="text-gray-800 font-medium">Laundry</span></span>
-        </div>
-        <p class="text-gray-500 text-xs uppercase tracking-widest font-bold">Masuk ke Akun Anda</p>
+    <!-- Logo PING! Laundry di bagian atas form -->
+    <div class="mb-8 flex flex-col items-center">
+        <img src="{{ asset('images/logo.png') }}" alt="PING! Laundry Logo" class="h-28 w-auto object-contain">
     </div>
 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}" class="space-y-5">
+    <form method="POST" action="{{ route('login') }}" class="space-y-6">
         @csrf
 
         <!-- Email Address -->
         <div>
-            <label for="email" class="block text-xs font-bold text-gray-700 uppercase mb-1">Alamat Email</label>
+            <label for="email" class="block text-sm font-medium text-gray-900 mb-1.5 ml-1">Email</label>
             <input id="email" 
-                   class="block w-full rounded-xl border-gray-300 shadow-sm focus:border-pink-500 focus:ring focus:ring-pink-200/50 transition duration-150" 
+                   class="block w-full px-5 py-3.5 rounded-full border-0 bg-white shadow-sm focus:ring-2 focus:ring-pink-500/50 text-gray-800 transition" 
                    type="email" 
                    name="email" 
                    value="{{ old('email') }}" 
                    required 
                    autofocus 
                    autocomplete="username" 
-                   placeholder="contoh@email.com" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                   placeholder="Email Anda" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2 ml-4" />
         </div>
 
         <!-- Password -->
         <div>
-            <div class="flex justify-between items-center mb-1">
-                <label for="password" class="block text-xs font-bold text-gray-700 uppercase">Kata Sandi</label>
+            <div class="flex justify-between items-center mb-1.5 ml-1">
+                <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
                 @if (Route::has('password.request'))
-                    <a class="text-xs font-bold text-pink-600 hover:text-pink-700 hover:underline" href="{{ route('password.request') }}">
+                    <a class="text-xs font-semibold text-pink-600 hover:text-pink-700 hover:underline" href="{{ route('password.request') }}">
                         Lupa sandi?
                     </a>
                 @endif
             </div>
             <input id="password" 
-                   class="block w-full rounded-xl border-gray-300 shadow-sm focus:border-pink-500 focus:ring focus:ring-pink-200/50 transition duration-150"
+                   class="block w-full px-5 py-3.5 rounded-full border-0 bg-white shadow-sm focus:ring-2 focus:ring-pink-500/50 text-gray-800 transition"
                    type="password"
                    name="password"
                    required 
                    autocomplete="current-password" 
-                   placeholder="••••••••" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                   placeholder="Password" />
+            <x-input-error :messages="$errors->get('password')" class="mt-2 ml-4" />
         </div>
 
-        <!-- Remember Me -->
-        <div class="flex items-center justify-between">
+        <!-- Remember Me (dibuat sangat subtle agar tidak mengganggu layout utama mockup) -->
+        <div class="flex items-center justify-between ml-1">
             <label for="remember_me" class="inline-flex items-center cursor-pointer">
                 <input id="remember_me" 
                        type="checkbox" 
                        class="rounded border-gray-300 text-pink-600 shadow-sm focus:ring-pink-500 focus:ring-pink-200/50" 
                        name="remember">
-                <span class="ms-2 text-sm text-gray-600 select-none">Ingat saya</span>
+                <span class="ms-2 text-xs text-gray-600 select-none">Ingat saya</span>
             </label>
         </div>
 
-        <!-- Submit Button -->
+        <!-- Submit Button (LOGIN) -->
         <div class="pt-2">
-            <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-4 rounded-xl transition duration-200 shadow-lg shadow-pink-200 text-sm tracking-wide">
-                Masuk Sekarang
+            <button type="submit" class="w-full bg-[#d94f87] hover:bg-pink-700 text-white font-bold py-3.5 px-4 rounded-full transition duration-200 shadow-md text-sm tracking-widest uppercase">
+                LOGIN
             </button>
         </div>
 
-        <!-- Footer Link -->
-        <div class="text-center text-sm text-gray-500 pt-4 border-t border-gray-100">
-            Belum punya akun? 
-            <a href="{{ route('register') }}" class="font-bold text-pink-600 hover:text-pink-700 hover:underline">
-                Daftar Gratis
+        <!-- Footer Link (Register) -->
+        <div class="text-center pt-4">
+            <a href="{{ route('register') }}" class="font-semibold text-pink-600 hover:text-pink-700 underline text-sm transition">
+                Register
             </a>
         </div>
     </form>

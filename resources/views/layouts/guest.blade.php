@@ -14,11 +14,10 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="bg-slate-50 font-sans text-slate-900 antialiased">
+    <body class="font-sans text-slate-900 antialiased min-h-screen" 
+          style="background-image: url('{{ asset('images/bg-login-reg.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: scroll;">
         <div class="flex min-h-screen flex-col items-center justify-center px-4 py-8">
-            
-
-            <div class="w-full max-w-md overflow-hidden rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="w-full max-w-xl p-4 md:p-8 bg-transparent">
                 {{ $slot }}
             </div>
         </div>
