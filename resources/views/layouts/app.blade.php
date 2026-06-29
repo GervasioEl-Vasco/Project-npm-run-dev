@@ -14,24 +14,32 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="bg-slate-50 font-sans antialiased">
-        <div class="min-h-screen">
-            @include('layouts.navigation')
+    <body class="font-sans antialiased min-h-screen" 
+          style="background-image: url('{{ asset('images/bg-dashboard.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; background-attachment: fixed;">
+        
+        @php
+            $isAdminOrStaff = in_array(Auth::user()?->role, ['admin', 'staff']);
+        @endphp
 
-            @php
-                $isAdminOrStaff = in_array(Auth::user()?->role, ['admin', 'staff']);
-            @endphp
-
-            <div class="mx-auto flex w-full max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:px-8">
-                <div class="hidden w-64 shrink-0 lg:block">
+        <div class="flex min-h-screen w-full p-4 lg:p-6 gap-6">
+            <!-- Sidebar Kiri (Floating Panel) -->
+            <div class="hidden lg:block w-64 shrink-0">
+                <div class="sticky top-6">
                     @if ($isAdminOrStaff)
                         <x-sidebar-admin />
                     @else
                         <x-sidebar-customer />
                     @endif
                 </div>
+            </div>
 
-                <div class="min-w-0 flex-1">
+            <!-- Area Konten Kanan -->
+            <div class="flex-1 flex flex-col min-w-0 min-h-[calc(100vh-3rem)]">
+                <!-- Navigasi Atas -->
+                @include('layouts.navigation')
+
+                <!-- Halaman Utama -->
+                <div class="flex-1 px-4 py-6 sm:px-6 lg:px-8 max-w-7xl w-full mx-auto">
                     @isset($header)
                         <header class="mb-6">
                             {{ $header }}

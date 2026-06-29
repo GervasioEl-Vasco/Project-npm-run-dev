@@ -1,28 +1,41 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div>
-            <p class="text-sm font-medium text-teal-700">Akun</p>
-            <h1 class="mt-1 text-2xl font-bold text-slate-950">{{ __('Profile') }}</h1>
-        </div>
-    </x-slot>
-
     <div class="space-y-6">
-        <x-card padding="p-5 sm:p-8">
-            <div class="max-w-xl">
+        
+        <!-- Header Section -->
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center gap-4">
+                <a href="{{ route('dashboard') }}" class="text-[#ba2b65] hover:text-pink-700 transition duration-200">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                </a>
+                <h2 class="text-2xl font-bold text-gray-900">Profile Akun</h2>
+            </div>
+            <div class="text-sm font-medium text-gray-400 whitespace-nowrap hidden sm:block">
+                Hari ini: {{ date('d F Y') }}
+            </div>
+        </div>
+
+        <!-- Profile Information Card -->
+        <div class="bg-white rounded-[2rem] shadow-xl border border-pink-100/50 p-8 max-w-5xl">
+            <div class="max-w-3xl">
                 @include('profile.partials.update-profile-information-form')
             </div>
-        </x-card>
+        </div>
 
-        <x-card padding="p-5 sm:p-8">
-            <div class="max-w-xl">
+        <!-- Update Password Card -->
+        <div class="bg-white rounded-[2rem] shadow-xl border border-pink-100/50 p-8 max-w-5xl">
+            <div class="max-w-3xl">
                 @include('profile.partials.update-password-form')
             </div>
-        </x-card>
+        </div>
 
-        <x-card padding="p-5 sm:p-8">
-            <div class="max-w-xl">
+        <!-- Delete User Account Card -->
+        <div class="bg-white rounded-[2rem] shadow-xl border border-pink-100/50 p-8 max-w-5xl">
+            <div class="max-w-3xl">
                 @include('profile.partials.delete-user-form')
             </div>
-        </x-card>
+        </div>
+
     </div>
 </x-app-layout>

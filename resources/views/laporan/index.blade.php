@@ -1,38 +1,35 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Laporan Keuangan & Operasional') }}
-        </h2>
-    </x-slot>
+    <div class="space-y-6">
+        <!-- Judul Halaman -->
+        <h2 class="text-2xl font-bold text-gray-900">Laporan Keuangan dan Operasional</h2>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            
-            <!-- Cards Ringkasan -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 p-6 rounded-2xl text-white shadow-lg">
-                    <span class="text-xs uppercase font-extrabold tracking-widest opacity-75">Total Omzet Bulan Ini</span>
-                    <h3 class="text-3xl font-black mt-2">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</h3>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-gray-400 block">Total Pesanan</span>
-                    <h3 class="text-3xl font-black text-gray-800 mt-2">{{ $totalOrders }} Order</h3>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                    <span class="text-xs uppercase font-extrabold tracking-widest text-gray-400 block">Status Selesai</span>
-                    <h3 class="text-3xl font-black text-green-600 mt-2">{{ $completedOrders }} Order</h3>
-                </div>
+        <!-- Cards Ringkasan (Stats) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Total Omzet Bulan Ini -->
+            <div class="bg-[#d94f87] p-8 rounded-[2rem] text-white shadow-xl flex flex-col justify-between h-40">
+                <span class="text-sm font-bold opacity-90">Total Omzet Bulan ini</span>
+                <h3 class="text-3xl font-black mt-2">Rp {{ number_format($totalRevenue, 0, ',', '.') }}</h3>
             </div>
-
-            <!-- Grafik Omzet -->
-            <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
-                <h3 class="text-lg font-bold text-gray-800 mb-4">Grafik Transaksi Mingguan</h3>
-                <div class="h-64">
-                    <canvas id="revenueChart"></canvas>
-                </div>
+            <!-- Total Pesanan -->
+            <div class="bg-white p-8 rounded-[2rem] border border-pink-100/50 shadow-lg flex flex-col justify-between h-40">
+                <span class="text-sm font-bold text-gray-800">Total Pesanan</span>
+                <h3 class="text-3xl font-black text-gray-900 mt-2">{{ $totalOrders }} Order</h3>
             </div>
-
+            <!-- Status Selesai -->
+            <div class="bg-white p-8 rounded-[2rem] border border-pink-100/50 shadow-lg flex flex-col justify-between h-40">
+                <span class="text-sm font-bold text-gray-800">Status Selesai</span>
+                <h3 class="text-3xl font-black text-gray-900 mt-2">{{ $completedOrders }} Order</h3>
+            </div>
         </div>
+
+        <!-- Grafik Omzet -->
+        <div class="bg-white p-8 rounded-[2rem] border border-pink-100/50 shadow-xl">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">Grafik Transaksi Mingguan</h3>
+            <div class="h-80">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+
     </div>
 
     <!-- ChartJS Script Integration -->
@@ -47,19 +44,42 @@
                     datasets: [{
                         label: 'Pendapatan (Rp)',
                         data: {!! json_encode($chartValues) !!},
-                        borderColor: '#4f46e5',
-                        backgroundColor: 'rgba(79, 70, 229, 0.1)',
-                        borderWidth: 3,
+                        borderColor: '#d94f87',
+                        backgroundColor: 'rgba(217, 79, 135, 0.15)',
+                        borderWidth: 4,
                         fill: true,
-                        tension: 0.4
+                        tension: 0.4,
+                        pointBackgroundColor: '#d94f87',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        pointHoverRadius: 7
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return 'Rp ' + new Intl.NumberFormat('id-ID').format(value);
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
                         }
                     }
                 }
