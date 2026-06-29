@@ -66,7 +66,7 @@
             @if($payment->bukti_bayar)
             <div class="mt-6 border-t pt-4">
                 <p class="font-bold text-gray-800 mb-2">Bukti Pembayaran:</p>
-                <img src="{{ asset('storage/app/public/bukti_pembayaran/' . $payment->bukti_bayar) }}" alt="Bukti Pembayaran" class="w-full max-w-sm mx-auto h-auto rounded-lg shadow-sm border border-gray-200">
+                <img src="{{ asset('storage/app/public/' . $payment->bukti_bayar) }}" alt="Bukti Pembayaran" class="w-full max-w-sm mx-auto h-auto rounded-lg shadow-sm border border-gray-200">
             </div>
             @endif
 
