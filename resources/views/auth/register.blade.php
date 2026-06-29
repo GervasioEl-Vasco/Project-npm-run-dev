@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-6 text-center">
-        <!-- Logo / Brand Header -->
+        
         <div class="flex justify-center items-center gap-2 mb-1">
             <span class="text-3xl">🫧</span>
             <span class="text-2xl font-black tracking-wider text-pink-600">PING!<span class="text-gray-800 font-medium">Laundry</span></span>
@@ -8,10 +8,10 @@
         <p class="text-gray-500 text-xs uppercase tracking-widest font-bold">Buat Akun Pelanggan Baru</p>
     </div>
 
-    <form method="POST" action="{{ route('register') }}" class="space-y-4">
+    <form method="POST" action="{{  route('register') }}" class="space-y-4">
         @csrf
 
-        <!-- Name -->
+       
         <div>
             <label for="name" class="block text-xs font-bold text-gray-700 uppercase mb-1">Nama Lengkap</label>
             <input id="name" 
@@ -26,12 +26,12 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <!-- Email Address -->
+        
         <div>
             <label for="email" class="block text-xs font-bold text-gray-700 uppercase mb-1">Alamat Email</label>
             <input id="email" 
                    class="block w-full rounded-xl border-gray-300 shadow-sm focus:border-pink-500 focus:ring focus:ring-pink-200/50 transition duration-150" 
-                   type="email" 
+                   type="email"     
                    name="email" 
                    value="{{ old('email') }}" 
                    required 
@@ -40,7 +40,6 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Phone Number (WhatsApp) -->
         <div>
             <label for="phone" class="block text-xs font-bold text-gray-700 uppercase mb-1">Nomor HP / WhatsApp</label>
             <input id="phone" 
@@ -53,7 +52,6 @@
             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
         </div>
 
-        <!-- Address -->
         <div>
             <label for="address" class="block text-xs font-bold text-gray-700 uppercase mb-1">Alamat Rumah</label>
             <input id="address" 
@@ -66,7 +64,7 @@
             <x-input-error :messages="$errors->get('address')" class="mt-2" />
         </div>
 
-        <!-- Password -->
+  
         <div>
             <label for="password" class="block text-xs font-bold text-gray-700 uppercase mb-1">Kata Sandi</label>
             <input id="password" 
@@ -79,7 +77,6 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Confirm Password -->
         <div>
             <label for="password_confirmation" class="block text-xs font-bold text-gray-700 uppercase mb-1">Konfirmasi Kata Sandi</label>
             <input id="password_confirmation" 
@@ -92,14 +89,14 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <!-- Submit Button -->
+
         <div class="pt-2">
             <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-4 rounded-xl transition duration-200 shadow-lg shadow-pink-200 text-sm tracking-wide">
                 Daftar Akun
             </button>
         </div>
 
-        <!-- Footer Link -->
+        
         <div class="text-center text-sm text-gray-500 pt-4 border-t border-gray-100">
             Sudah terdaftar? 
             <a href="{{ route('login') }}" class="font-bold text-pink-600 hover:text-pink-700 hover:underline">
