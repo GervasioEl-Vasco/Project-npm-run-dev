@@ -1,220 +1,300 @@
-# PING! Laundry — Sistem Manajemen Laundry
+# PING! Laundry: Sistem Manajemen Laundry
+
+<p align="center">
+  <a href="http://kelas-c-6.informatika-unjedir.web.id/">
+    <img src="https://img.shields.io/badge/Live_Demo-kelas--c--6.informatika--unjedir.web.id-0284c7?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Live Demo" />
+  </a>
+  <a href="https://github.com/GervasioEl-Vasco/Project-npm-run-dev">
+    <img src="https://img.shields.io/badge/GitHub_Repository-GervasioEl--Vasco%2FProject--npm--run--dev-d94f87?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repository" />
+  </a>
+</p>
 
 <p align="center">
   <img src="public/images/logo.png" width="350" alt="PING! Laundry Banner">
 </p>
 
-**PING! Laundry** adalah sistem manajemen laundry berbasis web yang dibangun menggunakan **Laravel 13** dan **Tailwind CSS**. Sistem ini dirancang untuk membantu pengelola usaha laundry dalam mengelola pesanan, pembayaran, pelanggan, dan laporan keuangan secara digital dengan antarmuka yang modern dan responsif.
-
-
-## ✨ Fitur Utama
-
-### Umum
-- 🔐 Autentikasi pengguna (Login, Register, Logout)
-- 👤 Kelola profil akun (ubah nama, email, password, hapus akun)
-- 📱 Desain responsif untuk desktop & mobile
-- 🎨 Tema premium pink modern dengan background kustom
-
-### Customer
-- 🧾 Membuat pesanan laundry baru
-- 📋 Melihat riwayat transaksi pribadi
-- 🔍 Pencarian & filter riwayat pesanan
-
-### Admin / Staff
-- 📦 Kelola seluruh pesanan masuk (lihat, ubah status, konfirmasi)
-- 👥 Manajemen pengguna (CRUD: tambah, edit, hapus pengguna)
-- 📊 Laporan keuangan & operasional dengan grafik mingguan
-- 📜 Riwayat transaksi seluruh pelanggan
-- 💳 Kelola pembayaran & konfirmasi pembayaran
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-v13.8-FF2D20?style=flat-square&logo=laravel&logoColor=white" alt="Laravel Version">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-v3.4.19-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" alt="Tailwind CSS">
+  <img src="https://img.shields.io/badge/Alpine.js-v3.x-77C1D2?style=flat-square&logo=alpine.js&logoColor=blue" alt="Alpine.js">
+  <img src="https://img.shields.io/badge/PHP-v8.3-777BB4?style=flat-square&logo=php&logoColor=white" alt="PHP Version">
+  <img src="https://img.shields.io/badge/MySQL-v8.0-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/Vite-v8.x-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite">
+</p>
 
 ---
 
-## 🛠 Tech Stack
-
-| Komponen          | Teknologi                          |
-| ----------------- | ---------------------------------- |
-| **Framework**     | Laravel 13.x                       |
-| **PHP**           | PHP 8.3+                           |
-| **Frontend**      | Blade Templates + TailwindCSS 3.x  |
-| **JavaScript**    | Alpine.js 3.x                      |
-| **Build Tool**    | Vite 8.x                           |
-| **Database**      | MySQL                              |
-| **Autentikasi**   | Laravel Breeze                     |
-| **Grafik**        | Chart.js (CDN)                     |
-| **Avatar**        | UI Avatars API                     |
-
----
-
-## 📦 Prasyarat
-
-Pastikan perangkat Anda telah terinstal:
-
-- **PHP** ≥ 8.3
-- **Composer** ≥ 2.x
-- **Node.js** ≥ 18.x & **NPM** ≥ 9.x
-- **MySQL** ≥ 8.0 (atau MariaDB ≥ 10.6)
-- **Laragon** / **XAMPP** / **WAMP** (opsional, sebagai lingkungan pengembangan lokal)
-- **Git**
+## 📌 Daftar Isi
+*   [ 1. Deskripsi & Masalah Projek](#1-deskripsi--masalah-projek)
+*   [ 2. Fitur Unggulan (Why PING! Laundry?)](#2-fitur-unggulan-why-ping-laundry)
+*   [ 3. Peran Pengguna & Fitur Sistem](#3-peran-pengguna--fitur-sistem)
+*   [ 4. Matriks Implementasi Fitur (Checklist)](#4-matriks-implementasi-fitur-checklist)
+*   [ 5. Arsitektur Sistem](#5-arsitektur-sistem)
+*   [ 6. Struktur Direktori Utama](#6-struktur-direktori-utama)
+*   [ 7. Skema & Entitas Database](#7-skema--entitas-database)
+*   [ 8. Panduan Instalasi Lokal](#8-panduan-instalasi-lokal)
+*   [ 9. Panduan Menjalankan Sistem](#9-panduan-menjalankan-sistem)
+*   [ 10. Agile Development & Trello Workflow](#10-agile-development--trello-workflow)
+*   [ 11. Dokumen Rekayasa Perangkat Lunak](#11-dokumen-rekayasa-perangkat-lunak)
+*   [ 12. Informasi Proyek (Metadata)](#12-informasi-proyek-metadata)
+*   [ 13. Tim Pengembang & Kontribusi](#13-tim-pengembang--kontribusi)
+*   [ 14. Workflow Kolaborasi Git](#14-workflow-kolaborasi-git)
+*   [ 15. Lisensi](#15-lisensi)
 
 ---
 
-## 🚀 Instalasi
+##  1. Deskripsi & Masalah Projek
 
-### 1. Clone Repositori
+### Permasalahan Nyata (Problem-First)
+Berdasarkan hasil observasi pada operasional usaha laundry konvensional, ditemukan sejumlah inefisiensi krusial pada alur kerja manual:
+1.  **Pencatatan Manual & Risiko Hilang:** Penggunaan nota fisik berbahan kertas rentan robek, basah, atau hilang, yang menyulitkan penelusuran histori transaksi saat pelanggan melakukan komplain.
+2.  **Ketidakpastian Status Cucian:** Pelanggan tidak dapat memantau apakah pakaian mereka sedang dicuci, disetrika, atau sudah selesai, kecuali dengan mendatangi outlet laundry secara langsung atau menghubungi admin secara manual.
+3.  **Potensi Selisih Keuangan:** Transaksi pembayaran kasir yang tidak tercatat secara digital seringkali memicu kesalahan rekapitulasi pembukuan bulanan bagi pemilik laundry.
+4.  **Resiko Kerusakan/Kehilangan Pakaian:** Tidak adanya pencatatan kondisi awal pakaian (quality check) pada saat penyerahan laundry seringkali memicu perselisihan antara pengelola laundry dan pelanggan mengenai kerusakan pakaian yang sebenarnya sudah ada sejak awal.
+5.  **Ketiadaan Laporan Terstruktur:** Pemilik laundry kesulitan memantau perkembangan omzet harian maupun mingguan karena data penjualan yang masih berserakan.
 
-```bash
-git clone https://github.com/GervasioEl-Vasco/Project-npm-run-dev.git
-cd Project-npm-run-dev
-```
+### Solusi: PING! Laundry
+**PING! Laundry** adalah sistem manajemen laundry berbasis web responsif (*Responsive Web Application*) yang dirancang untuk memodernisasi tata kelola operasional dan administrasi laundry. Sistem ini dibangun dengan arsitektur monolitik yang solid menggunakan **Laravel 13** dan **Tailwind CSS** untuk menghadirkan antarmuka pengguna (UI) bertema pink premium yang menarik, bersih, serta didukung reaktivitas frontend ringan menggunakan **Alpine.js**.
 
-### 2. Instal Dependensi PHP
-
-```bash
-composer install
-```
-
-### 3. Instal Dependensi JavaScript
-
-```bash
-npm install
-```
-
-### 4. Salin File Environment
-
-```bash
-cp .env.example .env
-```
-
-### 5. Generate Application Key
-
-```bash
-php artisan key:generate
-```
-
-### 6. Buat Database
-
-Buat database baru di MySQL dengan nama `ping_laundry`:
-
-```sql
-CREATE DATABASE ping_laundry;
-```
-
-### 7. Jalankan Migrasi Database
-
-```bash
-php artisan migrate
-```
-
-### 8. (Opsional) Jalankan Seeder
-
-Jika tersedia seeder untuk data awal:
-
-```bash
-php artisan db:seed
-```
+Dengan PING! Laundry, pelanggan dapat membuat pesanan secara mandiri, memantau status pengerjaan, mengunggah bukti pembayaran, serta mengelola detail profil mereka. Di sisi lain, staff dan admin dapat memproses pesanan masuk, menginput hasil pengecekan awal pakaian, memverifikasi pembayaran secara transparan, serta melihat rekap laporan keuangan mingguan secara visual dan dinamis.
 
 ---
 
-## ⚙ Konfigurasi
+##  2. Fitur Unggulan (Why PING! Laundry?)
 
-Edit file `.env` dan sesuaikan pengaturan berikut:
+Dibandingkan dengan proses pengelolaan laundry konvensional, PING! Laundry menawarkan beberapa keunggulan struktural:
 
-```env
-APP_NAME="PING! Laundry"
-APP_URL=http://localhost:8000
+> [!NOTE]
+> ###  Transparansi Pelacakan Status Real-Time
+> Alur status pesanan terdokumentasi dengan rapi (`menunggu`, `diproses`, `selesai`, `diambil`, `dibatalkan`) beserta pencatatan riwayat perubahan status pada log sistem, meminimalisasi ketidakpastian informasi bagi pelanggan.
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=ping_laundry
-DB_USERNAME=root
-DB_PASSWORD=
-```
+> [!TIP]
+> ###  Pengecekan Kualitas (Quality Assurance) Terintegrasi
+> Petugas laundry dapat mencatat hasil pemeriksaan fisik pakaian (Quality Check) serta mendokumentasikan catatan kerusakan awal sebelum proses pencucian dimulai untuk mencegah kesalahpahaman klaim ganti rugi.
+
+> [!IMPORTANT]
+> ###  Visualisasi Laporan Keuangan Interaktif
+> Dashboard Admin dilengkapi dengan grafik performa omzet mingguan yang responsif berbasis Chart.js (CDN), memberikan gambaran pertumbuhan bisnis laundry secara cepat bagi manajemen.
 
 ---
 
-## ▶ Menjalankan Aplikasi
+##  3. Peran Pengguna & Fitur Sistem
 
-### Mode Pengembangan (Development)
+Sistem ini membatasi hak akses secara ketat menggunakan middleware **Role-Based Access Control (RBAC)** yang membagi pengguna menjadi tiga peran:
 
-Jalankan dua terminal secara bersamaan:
+### A. Customer (Pelanggan)
+*   **Autentikasi Breeze Kustom:** Login dan registrasi dengan validasi input detail tambahan berupa Nomor HP aktif dan Alamat Rumah tinggal.
+*   **Pemesanan Laundry Mandiri:** Form pembuatan pesanan laundry baru secara online dengan memilih jenis layanan, estimasi berat/jumlah, serta catatan tambahan.
+*   **Daftar Riwayat Transaksi:** Menampilkan log semua pesanan aktif dan masa lalu beserta status pengerjaan serta metode pembayaran.
+*   **Unggah Bukti Bayar:** Fitur mengunggah gambar bukti transfer pembayaran non-tunai langsung dari halaman detail transaksi.
+*   **Pengaturan Akun (Profil):** Memperbarui info profil dasar, mengganti password, atau menghapus akun secara mandiri.
 
-**Terminal 1 — Server Laravel:**
-```bash
-php artisan serve
-```
+### B. Staff Laundry
+*   **Dashboard Operasional:** Ringkasan jumlah pesanan baru, pesanan yang sedang diproses, pesanan siap diambil, dan total transaksi yang perlu penanganan.
+*   **Kelola Antrean Pesanan:** Halaman visual untuk mengubah status pengerjaan pakaian (`menunggu` -> `diproses` -> `selesai` -> `diambil`).
+*   **Pencatatan Hasil Cek (Quality Check):** Form input kondisi fisik pakaian dan catatan kerusakan spesifik per pesanan.
+*   **Verifikasi Pembayaran:** Memeriksa bukti transfer pelanggan dan mengonfirmasi status pembayaran (berhasil/gagal).
+*   **Akses Laporan:** Melihat data omzet harian dan mingguan untuk pencatatan internal toko.
 
-**Terminal 2 — Vite (Asset Bundler):**
-```bash
-npm run dev
-```
+### C. Admin Sistem
+*   **Akses Fitur Staff:** Memiliki seluruh hak operasional yang dimiliki oleh Staff Laundry.
+*   **Manajemen Pengguna Global (CRUD):** Mengelola seluruh akun pengguna di sistem (Tambah, Detail, Edit, Hapus) baik berstatus Customer, Staff, maupun sesama Admin.
+*   **Dashboard Finansial:** Visualisasi grafik omzet keuangan mingguan terpadu dan widget ringkasan statistik laundry.
 
-Atau gunakan perintah tunggal:
-```bash
-composer dev
-```
+---
 
-Akses aplikasi di: **http://localhost:8000**
+##  4. Matriks Implementasi Fitur (Checklist)
 
-### Mode Produksi (Build)
+Tabel berikut menunjukkan status implementasi sesungguhnya dari fitur-fitur aplikasi berdasarkan keselarasan kode sumber (*source code*):
 
-```bash
-npm run build
+| Kategori | Fitur / Komponen | Status Implementasi | Deskripsi Kode |
+| :--- | :--- | :---: | :--- |
+| **Autentikasi** | Registrasi Akun Kustom | ✅ | `RegisteredUserController` live validation input nama, email, hp, alamat |
+| **Autentikasi** | Login & Proteksi Keamanan | ✅ | Terintegrasi Laravel Breeze dengan pengalihan dashboard berdasarkan role |
+| **Customer** | Pembuatan Pesanan Mandiri | ✅ | `PesananController@store` menyimpan data pesanan laundry |
+| **Customer** | Riwayat & Detail Transaksi | ✅ | `OrderHistoryController` memuat data riwayat belanja pelanggan |
+| **Customer** | Unggah Bukti Pembayaran | ✅ | `PembayaranController@store` mengunggah bukti bayar ke direktori penyimpanan |
+| **Customer** | Kelola Data Profil | ✅ | `ProfileController` mengelola edit profil, password, dan hapus akun |
+| **Staff & Admin** | Dashboard Operasional | ✅ | `dashboard.blade.php` memuat ringkasan jumlah pesanan & antrean |
+| **Staff & Admin** | Kelola Status Pesanan | ✅ | `StatusPesananController` memproses pembaruan status pengerjaan laundry |
+| **Staff & Admin** | Log Histori Status Pesanan | ✅ | Penambahan record log otomatis pada tabel `log_status_pesanan` |
+| **Staff & Admin** | Inspeksi Kondisi Pakaian | ✅ | Form verifikasi barang input ke tabel `pengecekan` |
+| **Staff & Admin** | Konfirmasi Pembayaran | ✅ | Verifikasi manual bukti transfer oleh admin/staff di `PembayaranController@konfirmasi` |
+| **Staff & Admin** | Manajemen Layanan Laundry | ✅ | `LayananController` mengelola paket laundry, harga, dan satuan |
+| **Staff & Admin** | Grafik Statistik Omzet | ✅ | `LaporanController` mengintegrasikan grafik omzet mingguan via Chart.js |
+| **Admin** | CRUD Pengguna Sistem (RBAC) | ✅ | `UserManagementController` untuk tambah, edit, detail, dan hapus user |
+
+---
+
+##  5. Arsitektur Sistem
+
+PING! Laundry mengadopsi arsitektur reaktif monolitik di mana Laravel bertindak sebagai backend penyedia data, Blade merender tampilan HTML, Tailwind CSS menangani styling premium, dan Alpine.js menambahkan interaksi frontend ringan:
+
+```mermaid
+flowchart TD
+    User["👤 Pengguna (Customer / Staff / Admin)"] -->|HTTP Requests| Browser["🌐 Web Browser"]
+    Browser -->|Routes / Controllers| Laravel["Laravel 13 Application"]
+    Laravel -->|Eloquent ORM| DB[("🗄️ MySQL Database")]
+    Laravel -->|Blade Render| Browser
+    Laravel -.->|Asset Build| Vite["⚡ Vite Bundler"]
 ```
 
 ---
 
-## 👥 Peran Pengguna (Roles)
+##  6. Struktur Direktori Utama
 
-Sistem ini mendukung 3 peran pengguna dengan hak akses berbeda:
+Berikut adalah bagian-bagian penting dari kode sumber aplikasi PING! Laundry:
 
-| Peran        | Kode       | Hak Akses                                                                |
-| ------------ | ---------- | ------------------------------------------------------------------------ |
-| **Customer** | `customer` | Membuat pesanan, melihat riwayat transaksi pribadi, kelola profil        |
-| **Staff**    | `staff`    | Sama seperti Admin (kelola pesanan, riwayat, laporan)                    |
-| **Admin**    | `admin`    | Semua fitur Staff + Manajemen Pengguna (CRUD user)                       |
+```text
+Project-npm-run-dev/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Admin/
+│   │   │   │   └── UserManagementController.php   # CRUD manajemen pengguna
+│   │   │   ├── Auth/
+│   │   │   │   ├── RegisteredUserController.php   # Registrasi kustom (HP & Alamat)
+│   │   │   │   └── ...                            # Controller auth Breeze
+│   │   │   ├── LaporanController.php              # Rekap omzet & data Chart.js
+│   │   │   ├── LayananController.php              # CRUD paket/layanan laundry
+│   │   │   ├── OrderHistoryController.php         # Riwayat pesanan pelanggan
+│   │   │   ├── PembayaranController.php           # Validasi & konfirmasi transaksi pembayaran
+│   │   │   ├── PesananController.php              # Manajemen pesanan masuk & buat pesanan
+│   │   │   ├── ProfileController.php              # Manajemen profil pengguna
+│   │   │   └── StatusPesananController.php        # Logika pembaruan status pesanan
+│   │   └── Middleware/
+│   │       └── EnsureUserHasRole.php              # Middleware RBAC (admin/staff/customer)
+│   └── Models/
+│       ├── User.php                               # Representasi tabel users
+│       ├── Layanan.php                            # Representasi tabel layanan
+│       ├── Pesanan.php                            # Representasi tabel pesanan
+│       ├── Pembayaran.php                         # Representasi tabel pembayaran
+│       ├── LogStatus.php                          # Representasi log_status_pesanan
+│       └── Pengecekan.php                         # Representasi pengecekan kualitas
+├── config/                                        # Berkas konfigurasi framework Laravel
+├── database/
+│   ├── migrations/                                # Migrasi skema database relasional
+│   └── seeders/                                   # Data sampel (UserSeeder, LayananSeeder)
+├── public/
+│   └── images/                                    # Aset gambar background & logo
+│       ├── bg-dashboard.png
+│       ├── bg-login-reg.png
+│       └── logo.png                               # Logo PING! Laundry
+├── resources/
+│   ├── css/
+│   │   └── app.css                                # File CSS utama Tailwind
+│   ├── js/
+│   │   └── app.js                                 # Inisialisasi Alpine.js
+│   └── views/                                     # View Blade Templates
+│       ├── admin/
+│       │   └── users/                             # View kelola user
+│       ├── auth/                                  # View autentikasi Breeze
+│       ├── components/                            # Komponen sidebar & layouting
+│       │   ├── sidebar-admin.blade.php
+│       │   └── sidebar-customer.blade.php
+│       ├── history/                               # View detail & daftar riwayat
+│       ├── laporan/                               # View grafik omzet
+│       ├── layouts/                               # Base layout (app, guest)
+│       ├── pesanan/                               # View buat pesanan & kelola status
+│       ├── profile/                               # View edit detail akun
+│       └── welcome.blade.php                      # Landing page PING! Laundry
+├── routes/
+│   ├── web.php                                    # Route utama aplikasi
+│   └── auth.php                                   # Route otentikasi
+├── tailwind.config.js                             # Kustomisasi tema warna pink premium
+└── vite.config.js                                 # Konfigurasi bundler Vite
+```
 
-> **Catatan:** Saat mendaftar melalui halaman Register, pengguna secara otomatis mendapatkan role `customer`. Untuk membuat akun Admin/Staff, gunakan fitur Manajemen Pengguna dari akun Admin yang sudah ada atau langsung melalui database.
+*File controller utama:*
+- [UserManagementController.php](file:///c:/laragon/www/Project-npm-run-dev/app/Http/Controllers/Admin/UserManagementController.php)
+- [RegisteredUserController.php](file:///c:/laragon/www/Project-npm-run-dev/app/Http/Controllers/Auth/RegisteredUserController.php)
+- [LaporanController.php](file:///c:/laragon/www/Project-npm-run-dev/app/Http/Controllers/LaporanController.php)
+- [LayananController.php](file:///c:/laragon/www/Project-npm-run-dev/app/Http/Controllers/LayananController.php)
+- [OrderHistoryController.php](file:///c:/laragon/www/Project-npm-run-dev/app/Http/Controllers/OrderHistoryController.php)
+- [PembayaranController.php](file:///c:/laragon/www/Project-npm-run-dev/app/Http/Controllers/PembayaranController.php)
+- [PesananController.php](file:///c:/laragon/www/Project-npm-run-dev/app/Http/Controllers/PesananController.php)
+- [ProfileController.php](file:///c:/laragon/www/Project-npm-run-dev/app/Http/Controllers/ProfileController.php)
+- [StatusPesananController.php](file:///c:/laragon/www/Project-npm-run-dev/app/Http/Controllers/StatusPesananController.php)
+
+*File models utama:*
+- [User.php](file:///c:/laragon/www/Project-npm-run-dev/app/Models/User.php)
+- [Layanan.php](file:///c:/laragon/www/Project-npm-run-dev/app/Models/Layanan.php)
+- [Pesanan.php](file:///c:/laragon/www/Project-npm-run-dev/app/Models/Pesanan.php)
+- [Pembayaran.php](file:///c:/laragon/www/Project-npm-run-dev/app/Models/Pembayaran.php)
+- [LogStatus.php](file:///c:/laragon/www/Project-npm-run-dev/app/Models/LogStatus.php)
+- [Pengecekan.php](file:///c:/laragon/www/Project-npm-run-dev/app/Models/Pengecekan.php)
+
+*File rute utama:*
+- [web.php](file:///c:/laragon/www/Project-npm-run-dev/routes/web.php)
+- [auth.php](file:///c:/laragon/www/Project-npm-run-dev/routes/auth.php)
 
 ---
 
-## 📄 Struktur Halaman
+##  7. Skema & Entitas Database
 
-### Halaman Publik (Tanpa Login)
+Basis data **PING! Laundry** terdiri dari 6 entitas tabel utama di MySQL yang saling berelasi secara presisi untuk mendukung alur bisnis laundry dari pemesanan hingga pembayaran:
 
-| Halaman         | URL           | Deskripsi                                          |
-| --------------- | ------------- | -------------------------------------------------- |
-| Welcome / Home  | `/`           | Halaman sambutan dengan tombol Login & Register     |
-| Login           | `/login`      | Formulir login pengguna                             |
-| Register        | `/register`   | Formulir pendaftaran pengguna baru                  |
+### Entity Relationship Diagram (ERD)
 
-### Halaman Customer (Setelah Login)
+```mermaid
+erDiagram
+    users ||--o{ pesanan : "membuat"
+    layanan ||--o{ pesanan : "digunakan_pada"
+    pesanan ||--o{ pembayaran : "memiliki"
+    pesanan ||--o{ log_status_pesanan : "mencatat"
+    pesanan ||--o{ pengecekan : "diperiksa"
 
-| Halaman              | URL                  | Deskripsi                                       |
-| -------------------- | -------------------- | ----------------------------------------------- |
-| Dashboard            | `/dashboard`         | Halaman utama dengan menu navigasi cepat        |
-| Buat Pesanan Baru    | `/pesanan/create`    | Formulir pembuatan pesanan laundry              |
-| Riwayat Transaksi    | `/riwayat-pesanan`   | Daftar seluruh pesanan milik pelanggan           |
-| Detail Transaksi     | `/riwayat-pesanan/{id}` | Detail lengkap satu pesanan                  |
-| Profil Akun          | `/profile`           | Ubah nama, email, password, atau hapus akun     |
-
-### Halaman Admin / Staff (Setelah Login)
-
-| Halaman              | URL                         | Deskripsi                                      |
-| -------------------- | --------------------------- | ---------------------------------------------- |
-| Dashboard            | `/dashboard`                | Halaman utama dengan menu navigasi admin       |
-| Kelola Pesanan       | `/pesanan`                  | Daftar semua pesanan aktif                     |
-| Kelola Status        | `/pesanan/{id}/status`      | Ubah status pesanan                            |
-| Riwayat Pesanan      | `/riwayat-pesanan`          | Riwayat seluruh transaksi                      |
-| Laporan Keuangan     | `/laporan`                  | Ringkasan omzet, total pesanan & grafik        |
-| Manajemen Pengguna   | `/admin/users`              | Daftar seluruh pengguna *(khusus Admin)*       |
-| Tambah Pengguna      | `/admin/users/create`       | Formulir tambah pengguna baru *(khusus Admin)* |
-| Edit Pengguna        | `/admin/users/{id}/edit`    | Edit data pengguna *(khusus Admin)*            |
-| Profil Akun          | `/profile`                  | Ubah nama, email, password, atau hapus akun    |
-
----
-
-## 🗄 Skema Database
+    users {
+        bigint id PK
+        varchar name
+        varchar email
+        varchar phone
+        varchar address
+        varchar password
+        enum role
+        boolean is_active
+    }
+    layanan {
+        bigint id PK
+        varchar nama_layanan
+        text deskripsi
+        decimal harga
+        varchar satuan
+        int estimasi_waktu
+        boolean status_tersedia
+    }
+    pesanan {
+        bigint id PK
+        bigint user_id FK
+        bigint layanan_id FK
+        int berat_jumlah
+        decimal total_harga
+        enum status_pesanan
+        enum status_pembayaran
+        text catatan
+    }
+    log_status_pesanan {
+        bigint id PK
+        bigint pesanan_id FK
+        varchar status_sebelumnya
+        varchar status_baru
+        text keterangan
+    }
+    pengecekan {
+        bigint id PK
+        bigint pesanan_id FK
+        varchar hasil_cek
+        text catatan_kerusakan
+    }
+    pembayaran {
+        bigint id PK
+        bigint pesanan_id FK
+        decimal nominal
+        varchar metode_pembayaran
+        varchar bukti_bayar
+        enum status
+    }
+```
 
 ### Tabel `users`
 
@@ -298,209 +378,165 @@ Sistem ini mendukung 3 peran pengguna dengan hak akses berbeda:
 | `created_at`        | TIMESTAMP          | Waktu dibuat                              |
 | `updated_at`        | TIMESTAMP          | Waktu diperbarui                          |
 
-### Diagram Relasi Antar Tabel
+---
 
-```
-┌──────────┐       ┌──────────┐       ┌────────────┐
-│  users   │──1:N──│ pesanan  │──1:N──│ pembayaran │
-└──────────┘       └──────────┘       └────────────┘
-                        │
-                   ┌────┴────┐
-                   │         │
-              ┌────▼───┐ ┌──▼──────────────┐
-              │pengecekan│ │log_status_pesanan│
-              └─────────┘ └─────────────────┘
-                        │
-                   ┌────▼────┐
-                   │ layanan │
-                   └─────────┘
-```
+## 🔧 8. Panduan Instalasi Lokal
+
+Ikuti petunjuk di bawah ini untuk menginstal proyek di mesin lokal Anda:
+
+### Kebutuhan Minimal Sistem
+*   **PHP >= 8.3** (disarankan extension `pdo_mysql`, `mbstring`, `openssl` terinstal)
+*   **Composer** >= 2.x
+*   **Node.js >= 18** & **npm** >= 9.x
+*   **MySQL Server >= 8.0**
+
+### Langkah Setup Langkah-demi-Langkah
+
+1.  **Kloning Repositori:**
+    ```bash
+    git clone https://github.com/GervasioEl-Vasco/Project-npm-run-dev.git
+    cd Project-npm-run-dev
+    ```
+
+2.  **Instal Dependensi PHP & Frontend:**
+    ```bash
+    composer install
+    npm install
+    ```
+
+3.  **Salin Berkas Environment:**
+    ```bash
+    cp .env.example .env
+    ```
+
+4.  **Konfigurasikan database lokal pada file `.env`:**
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=ping_laundry
+    DB_USERNAME=root
+    DB_PASSWORD=your_password_here
+    ```
+
+5.  **Hasilkan Application Key & Jalankan Migrasi Data:**
+    ```bash
+    php artisan key:generate
+    php artisan migrate --seed
+    ```
+    *Seeder akan membuat akun demo default:*
+    *   **Admin:** `admin@pinglaundry.com` (password: `password123`)
+    *   **Penjual (Staff):** `staff@pinglaundry.com` (password: `password123`)
+    *   **Mahasiswa (Customer):** `customer@pinglaundry.com` (password: `password123`)
 
 ---
 
-## 🔗 Daftar Route
+##  9. Panduan Menjalankan Sistem
 
-### Route Publik
+Aplikasi membutuhkan server web Laravel dan Vite dev server aktif bersamaan agar seluruh aset terkompilasi dan sistem berjalan lancar:
 
-| Metode | URL            | Deskripsi            |
-| ------ | -------------- | -------------------- |
-| GET    | `/`            | Halaman Welcome      |
-| GET    | `/login`       | Halaman Login        |
-| POST   | `/login`       | Proses Login         |
-| GET    | `/register`    | Halaman Register     |
-| POST   | `/register`    | Proses Registrasi    |
-
-### Route Terautentikasi (Memerlukan Login)
-
-| Metode | URL                                   | Controller                   | Deskripsi                    |
-| ------ | ------------------------------------- | ---------------------------- | ---------------------------- |
-| GET    | `/dashboard`                          | Closure (view)               | Halaman Dashboard            |
-| GET    | `/profile`                            | ProfileController@edit       | Halaman edit profil          |
-| PATCH  | `/profile`                            | ProfileController@update     | Simpan perubahan profil      |
-| DELETE | `/profile`                            | ProfileController@destroy    | Hapus akun                   |
-| GET    | `/pesanan`                            | PesananController@index      | Daftar semua pesanan         |
-| GET    | `/pesanan/create`                     | PesananController@create     | Form buat pesanan baru       |
-| POST   | `/pesanan`                            | PesananController@store      | Simpan pesanan baru          |
-| GET    | `/pesanan/{pesanan}`                  | PesananController@show       | Detail pesanan               |
-| GET    | `/pesanan/{pesanan}/status`           | StatusPesananController@edit | Form ubah status pesanan     |
-| PATCH  | `/pesanan/{pesanan}/status`           | StatusPesananController@update| Simpan perubahan status     |
-| GET    | `/riwayat-pesanan`                    | OrderHistoryController@index | Riwayat pesanan              |
-| GET    | `/riwayat-pesanan/{pesanan}`          | OrderHistoryController@show  | Detail riwayat pesanan       |
-| GET    | `/pembayaran`                         | PembayaranController@index   | Daftar pembayaran            |
-| GET    | `/pesanan/{pesanan}/pembayaran/create`| PembayaranController@create  | Form pembayaran              |
-| POST   | `/pesanan/{pesanan}/pembayaran`       | PembayaranController@store   | Simpan pembayaran            |
-| GET    | `/pembayaran/{pembayaran}`            | PembayaranController@show    | Detail pembayaran            |
-| PATCH  | `/pembayaran/{pembayaran}/konfirmasi` | PembayaranController@konfirmasi| Konfirmasi pembayaran      |
-| GET    | `/laporan`                            | LaporanController@index      | Laporan keuangan             |
-
-### Route Admin (Memerlukan Middleware `admin`)
-
-| Metode | URL                          | Controller                     | Deskripsi              |
-| ------ | ---------------------------- | ------------------------------ | ---------------------- |
-| GET    | `/admin/users`               | UserManagementController@index | Daftar pengguna        |
-| GET    | `/admin/users/create`        | UserManagementController@create| Form tambah pengguna   |
-| POST   | `/admin/users`               | UserManagementController@store | Simpan pengguna baru   |
-| GET    | `/admin/users/{user}/edit`   | UserManagementController@edit  | Form edit pengguna     |
-| PUT    | `/admin/users/{user}`        | UserManagementController@update| Simpan perubahan       |
-| DELETE | `/admin/users/{user}`        | UserManagementController@destroy| Hapus pengguna        |
+### Opsi A: Eksekusi Concurrently (Instan) ⚡
+Proyek ini dikonfigurasi dengan script *concurrent execution* di `composer.json` menggunakan library `concurrently`. Jalankan satu perintah di bawah ini untuk memulai seluruh server secara paralel:
+```bash
+composer dev
+```
+*Perintah di atas akan menyalakan server Laravel Serve, Queue Listener, Pail logger, dan Vite Dev Server secara otomatis.*
 
 ---
 
-## 📂 Struktur Folder Proyek
+### Opsi B: Eksekusi Manual (Dua Terminal Terpisah) 🛠️
+Jika Anda ingin memantau log spesifik dari masing-masing komponen:
 
-```
-Project-npm-run-dev/
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   │   ├── Admin/
-│   │   │   │   └── UserManagementController.php   # CRUD manajemen pengguna
-│   │   │   ├── Auth/
-│   │   │   │   ├── RegisteredUserController.php   # Registrasi pengguna
-│   │   │   │   └── ...                            # Controller auth lainnya
-│   │   │   ├── LaporanController.php              # Laporan keuangan & grafik
-│   │   │   ├── LayananController.php              # CRUD layanan laundry
-│   │   │   ├── OrderHistoryController.php         # Riwayat pesanan
-│   │   │   ├── PembayaranController.php           # Kelola pembayaran
-│   │   │   ├── PesananController.php              # Kelola pesanan
-│   │   │   ├── ProfileController.php              # Kelola profil akun
-│   │   │   └── StatusPesananController.php        # Ubah status pesanan
-│   │   └── Middleware/                             # Middleware (admin, auth, dll.)
-│   └── Models/
-│       ├── User.php                               # Model pengguna
-│       ├── Layanan.php                            # Model layanan
-│       ├── Pesanan.php                            # Model pesanan
-│       ├── Pembayaran.php                         # Model pembayaran
-│       ├── LogStatus.php                          # Model log status
-│       └── Pengecekan.php                         # Model pengecekan
-│
-├── database/
-│   ├── migrations/                                # File migrasi database
-│   ├── factories/                                 # Factory untuk testing
-│   └── seeders/                                   # Seeder data awal
-│
-├── public/
-│   └── images/
-│       ├── bg-landing.png                         # Background halaman Welcome
-│       ├── bg-login-reg.png                       # Background halaman Login & Register
-│       └── bg-dashboard.png                       # Background halaman Dashboard (dengan logo)
-│
-├── resources/
-│   ├── views/
-│   │   ├── layouts/
-│   │   │   ├── app.blade.php                      # Layout utama (dashboard)
-│   │   │   ├── guest.blade.php                    # Layout tamu (login, register)
-│   │   │   └── navigation.blade.php               # Navbar atas + mobile drawer
-│   │   ├── components/
-│   │   │   ├── sidebar-customer.blade.php         # Sidebar navigasi customer
-│   │   │   └── sidebar-admin.blade.php            # Sidebar navigasi admin/staff
-│   │   ├── auth/
-│   │   │   ├── login.blade.php                    # Halaman login
-│   │   │   └── register.blade.php                 # Halaman registrasi
-│   │   ├── dashboard.blade.php                    # Halaman dashboard (role-based)
-│   │   ├── welcome.blade.php                      # Halaman landing / sambutan
-│   │   ├── pesanan/
-│   │   │   ├── index.blade.php                    # Daftar pesanan (admin)
-│   │   │   └── create.blade.php                   # Form buat pesanan baru
-│   │   ├── history/
-│   │   │   └── index.blade.php                    # Riwayat transaksi
-│   │   ├── laporan/
-│   │   │   └── index.blade.php                    # Laporan keuangan + grafik
-│   │   ├── admin/users/
-│   │   │   ├── index.blade.php                    # Daftar pengguna
-│   │   │   ├── create.blade.php                   # Form tambah pengguna
-│   │   │   └── edit.blade.php                     # Form edit pengguna
-│   │   └── profile/
-│   │       ├── edit.blade.php                     # Halaman kelola profil
-│   │       └── partials/
-│   │           ├── update-profile-information-form.blade.php
-│   │           ├── update-password-form.blade.php
-│   │           └── delete-user-form.blade.php
-│   ├── css/
-│   │   └── app.css                                # Stylesheet utama
-│   └── js/
-│       └── app.js                                 # JavaScript utama (Alpine.js)
-│
-├── routes/
-│   ├── web.php                                    # Definisi route web
-│   └── auth.php                                   # Route autentikasi (Breeze)
-│
-├── .env.example                                   # Template konfigurasi environment
-├── composer.json                                  # Dependensi PHP
-├── package.json                                   # Dependensi JavaScript
-├── tailwind.config.js                             # Konfigurasi TailwindCSS
-├── vite.config.js                                 # Konfigurasi Vite bundler
-└── README.md                                      # Dokumentasi ini
+1.  **Terminal 1 (Laravel Server):**
+    ```bash
+    php artisan serve
+    ```
+2.  **Terminal 2 (Kompilasi Aset / Vite):**
+    ```bash
+    npm run dev
+    ```
+
+Akses aplikasi di: **http://localhost:8000**
+
+---
+
+##  10. Agile Development & Trello Workflow
+
+Pengembangan sistem PING! Laundry dikelola menggunakan kerangka kerja **Agile Scrum** dengan pembagian tugas melalui Trello Board:
+
+```text
+[ Backlog ] ──> [ To Do (Sprint) ] ──> [ In Progress ] ──> [ Testing (QA) ] ──> [ Done ]
 ```
 
----
-
-## 🎨 Desain & UI/UX
-
-### Tema Warna
-
-Sistem ini menggunakan palet warna pink premium sebagai identitas brand **PING! Laundry**:
-
-| Elemen              | Warna Hex   | Penggunaan                                |
-| ------------------- | ----------- | ----------------------------------------- |
-| Pink Utama          | `#d94f87`   | Sidebar, tombol aksi utama, grafik        |
-| Pink Lembut         | `#e8a3c0`   | Header tabel, tombol sekunder, badge      |
-| Pink Teks           | `#ba2b65`   | Teks tombol, ikon aktif                   |
-| Putih               | `#ffffff`   | Card, latar tabel, input                  |
-| Abu-abu             | `#6b7280`   | Teks sekunder, placeholder                |
-
-### Komponen Desain
-
-- **Sidebar**: Panel melayang dengan sudut lengkung besar (`rounded-[2.5rem]`), warna pink solid, sticky di sisi kiri
-- **Card**: Background putih bersih dengan `rounded-[2rem]`, bayangan `shadow-xl`, dan border pink transparan
-- **Tabel**: Header berwarna pink lembut, garis pembatas kolom vertikal, sudut melengkung
-- **Input**: Berbentuk kapsul bulat penuh (`rounded-full`) dengan border abu-abu dan fokus ring pink
-- **Tombol**: Berbentuk pil (`rounded-full` atau `rounded-xl`) dengan warna pink bervariasi
-- **Background**: Gambar kustom `bg-dashboard.png` yang sudah menyertakan logo PING! Laundry
-
-### Responsivitas
-
-- **Desktop (≥1024px)**: Layout sidebar kiri + konten utama kanan, navbar atas transparan
-- **Mobile (<1024px)**: Sidebar tersembunyi, digantikan oleh **hamburger menu** yang membuka **slide-out drawer** dari kiri layar dengan animasi halus dan overlay backdrop blur
+*   **Sprint 1 (Fokus Pondasi & Autentikasi):**
+    *   Setup repository Git & inisialisasi arsitektur Laravel Breeze & Tailwind CSS.
+    *   Kustomisasi field registrasi multi-role (penambahan field HP & Alamat) (`US-001`).
+    *   Pembuatan layout UI dashboard melayang (floating sidebar) premium warna pink (`US-002`).
+    *   Implementasi middleware RBAC (admin/staff/customer) (`US-003`).
+*   **Sprint 2 (Fokus Transaksi & Pengecekan Kualitas):**
+    *   Pembuatan form pemesanan laundry baru di sisi pelanggan (`US-004`).
+    *   Modul pengelolaan daftar layanan laundry oleh pengelola (`US-005`).
+    *   Implementasi alur transaksi, invoice, dan upload bukti transfer (`US-006`).
+    *   Sistem pengecekan kualitas barang (Quality Check) sebelum dicuci (`US-007`).
+*   **Sprint 3 (Fokus Operasional & Pelaporan):**
+    *   Pembuatan modul dashboard antrean pesanan staff dan admin (`US-008`).
+    *   Pencatatan riwayat log perubahan status pengerjaan pakaian (`US-009`).
+    *   Verifikasi dan konfirmasi pembayaran manual oleh Admin/Staff (`US-010`).
+    *   Modul visualisasi rekap laporan omzet mingguan menggunakan Chart.js (`US-011`).
+    *   CRUD manajemen akun pengguna terpusat khusus level Admin (`US-012`).
 
 ---
 
-## 🤝 Kontribusi
+##  11. Dokumen Rekayasa Perangkat Lunak
 
-1. Fork repositori ini
-2. Buat branch fitur baru: `git checkout -b fitur/nama-fitur`
-3. Commit perubahan: `git commit -m "Menambahkan fitur baru"`
-4. Push ke branch: `git push origin fitur/nama-fitur`
-5. Buat Pull Request
+Seluruh dokumentasi perancangan dan pengujian sistem telah disusun secara terperinci dan dapat ditelusuri pada berkas pendukung berikut:
+
+*   **✅ Dokumen Pengujian Black-Box (Black-Box Testing):** [BLACKBOX_TESTING.md](file:///c:/laragon/www/Project-npm-run-dev/BLACKBOX_TESTING.md) — Dokumen lengkap yang memuat 59 skenario pengujian fungsional di 12 modul utama.
+*   **✅ Trello Board:** [Akses Trello Kanban Board](https://trello.com/invite/b/6a36542ebf171777e1328a64/ATTIf30acc26fbe4ccb0a4f7c2fca46484ddA8574893/rencana-project-rpl)
+*   **✅ Video Presentasi Projek:** [Link Video Youtube](https://youtu.be/IfQ71MlnilE)
 
 ---
 
-## 📄 Lisensi
+##  12. Informasi Proyek (Metadata)
 
-Proyek ini dilisensikan di bawah [MIT License](https://opensource.org/licenses/MIT).
+| Detail Metadata | Deskripsi Nilai |
+| :--- | :--- |
+| **Nama Proyek** | PING! Laundry - Sistem Manajemen Laundry |
+| **Versi Aplikasi** | 1.0.0 (Release Candidate) |
+| **Framework Utama** | Laravel 13.8 & Tailwind CSS 3.4.19 |
+| **Pustaka JS & CSS** | Alpine.js 3.x, Chart.js (via CDN) |
+| **Database DBMS** | MySQL Server 8.0 / MariaDB |
+| **Universitas** | Universitas Jenderal Soedirman (UNSOED) |
+| **Program Studi** | S1 Informatika - Fakultas Teknik |
+| **Mata Kuliah** | Rekayasa Perangkat Lunak (RPL) & Pemrograman Web |
+| **Dosen Pengampu** | Mochammad Agri Triansyah, S.Kom., M.Kom. |
+
+---
+
+##  13. Tim Pengembang & Kontribusi
+
+| Nama Pengembang | NIM | Peran Utama | Kontribusi Utama |
+| :--- | :--- | :--- | :--- |
+| **Alifvia Putri Dewani** | H1D024131 | **Project Manager & Backend** | • Mengoordinasikan pembagian tugas dan progres pengembangan tim menggunakan Git dan GitHub.<br>• Merancang dan membangun routing, database schema, migration, controller, dan middleware otentikasi.<br>• Membantu proses penyusunan dokumentasi dan pengujian akhir aplikasi. |
+| **Khoiri Faldi Marwan H** | H1D024105 | **Backend** | • Mengembangkan logika bisnis backend menggunakan Laravel, model, database migrations, dan seeders.<br>• Melakukan integrasi backend pada modul admin & staff serta merancang relasi entitas database. |
+| **Dzikru Yunus Khabibi** | H1D024136 | **Frontend** | • Mengembangkan antarmuka (UI) premium untuk seluruh peran (Customer, Staff, Admin) menggunakan Tailwind CSS dan Alpine.js.<br>• Menyusun layout melayang (floating sidebar), panel dashboard responsif, dan layouting mobile-friendly.<br>• Mengintegrasikan form, tombol-tombol kustom, tabel dengan header pink premium, dan visualisasi grafik Chart.js. |
+| **M. Zacky Makarim** | H1D024121 | **UI/UX** | • Merancang layout mock-up antarmuka pengguna dan visual branding PING! Laundry.<br>• Menyusun skenario pengujian fungsional (Black-box Testing) untuk memastikan keandalan sistem.<br>• Mendokumentasikan bug, menguji fungsionalitas CRUD manajemen pengguna, serta menulis panduan instalasi. |
+
+---
+
+##  14. Workflow Kolaborasi Git
+
+Demi menjaga kualitas kode dan menghindari konflik branch (*conflict merging*), tim menerapkan workflow git yang disiplin:
+
+1.  **Branch Utama (`main`):** Hanya berisi kode produksi yang stabil dan siap dideploy.
+2.  **Branch Fitur (`feature/[Nama_Fitur]`):** Setiap pengembang membuat branch baru untuk pengerjaan fitur spesifik.
+3.  **Prosedur Pull Request (PR):**
+    *   Pengembang mengajukan PR ke branch `main`.
+    *   Dilakukan peninjauan kode (*code review*) dan verifikasi kelayakan uji coba.
+    *   Merge disetujui setelah tidak ditemukan konflik dan pengujian lulus.
 
 ---
 
 <p align="center">
-  Dibuat dengan ❤️ oleh Tim <strong>PING! Laundry</strong>
+  SISTEM MANAJEMEN LAUNDRY - Universitas Jenderal Soedirman.
 </p>
