@@ -491,7 +491,7 @@ Pengembangan sistem PING! Laundry dikelola menggunakan kerangka kerja **Agile Sc
 
 Seluruh dokumentasi perancangan dan pengujian sistem telah disusun secara terperinci dan dapat ditelusuri pada berkas pendukung berikut:
 
-*   **✅ Dokumen Pengujian Black-Box (Black-Box Testing):** [BLACKBOX_TESTING.md](file:///c:/laragon/www/Project-npm-run-dev/BLACKBOX_TESTING.md) — Dokumen lengkap yang memuat 59 skenario pengujian fungsional di 12 modul utama.
+*   **✅ Dokumen Pengujian Black-Box (Black-Box Testing):** [BLACKBOX_TESTING.md](https://github.com/GervasioEl-Vasco/Project-npm-run-dev/blob/8766f159b80b53e02bf69b9d75d3f201926210cd/BLACKBOX_TESTING.md) — Dokumen lengkap yang memuat 59 skenario pengujian fungsional di 12 modul utama.
 *   **✅ Trello Board:** [Akses Trello Kanban Board](https://trello.com/invite/b/6a36542ebf171777e1328a64/ATTIf30acc26fbe4ccb0a4f7c2fca46484ddA8574893/rencana-project-rpl)
 *   **✅ Video Presentasi Projek:** [Link Video Youtube](https://youtu.be/IfQ71MlnilE)
 
